@@ -1,0 +1,107 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="report" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4e65ed2d-e868-48c9-aca0-fa5f19d6d9c0">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="adaptus"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<query language="SQL"><![CDATA[SELECT * FROM Medico]]></query>
+	<field name="SSN" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="SSN"/>
+		<property name="com.jaspersoft.studio.field.label" value="SSN"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medico"/>
+	</field>
+	<field name="Nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medico"/>
+	</field>
+	<field name="Apellido" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Apellido"/>
+		<property name="com.jaspersoft.studio.field.label" value="Apellido"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medico"/>
+	</field>
+	<field name="Especialidad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Especialidad"/>
+		<property name="com.jaspersoft.studio.field.label" value="Especialidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medico"/>
+	</field>
+	<field name="Anios_Experiencia" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Anios_Experiencia"/>
+		<property name="com.jaspersoft.studio.field.label" value="Anios_Experiencia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medico"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="80" splitType="Stretch">
+		<element kind="staticText" uuid="c3bac6f4-f149-444d-b0dd-55c71ec2c72f" x="380" y="10" width="159" height="30" fontSize="18.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Médicos activos]]></text>
+		</element>
+		<element kind="staticText" uuid="51d88f7e-618a-4e65-8c18-0e74ebd7c4bb" x="380" y="40" width="149" height="20" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Reporte de personal.]]></text>
+		</element>
+		<element kind="rectangle" uuid="442068d6-9bf5-450e-a8dc-cd0bf72a737a" mode="Opaque" x="0" y="70" width="550" height="1" backcolor="#030000"/>
+		<element kind="staticText" uuid="2e85a5f5-7fb7-45dd-b4e8-925a3480b70f" x="0" y="10" width="190" height="40" fontSize="24.0" bold="true" italic="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Farmacias R-X]]></text>
+		</element>
+	</title>
+	<columnHeader height="40" splitType="Stretch">
+		<element kind="staticText" uuid="1b09da0b-b111-48b8-9865-ff0f8eaab80c" x="0" y="0" width="110" height="40" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[SSN]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ae30b0b2-8959-4702-92de-3923d1b3bd26"/>
+		</element>
+		<element kind="staticText" uuid="5e79d5bf-3701-4400-8cdb-79d9860b870f" x="110" y="0" width="110" height="40" bold="true" hTextAlign="Justified" vTextAlign="Middle">
+			<text><![CDATA[Nombre]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c0bd572a-0aca-4547-b87c-e17573b39108"/>
+		</element>
+		<element kind="staticText" uuid="ef29ba5c-180d-4a70-a18b-526d4c9252e2" x="220" y="0" width="110" height="40" bold="true" hTextAlign="Justified" vTextAlign="Middle">
+			<text><![CDATA[Apellido]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8e876e9f-f88c-4219-8afe-7d10f66eeb14"/>
+		</element>
+		<element kind="staticText" uuid="649d6fe6-3994-4717-91fd-b3d0702e0e0e" x="330" y="0" width="110" height="40" bold="true" hTextAlign="Justified" vTextAlign="Middle">
+			<text><![CDATA[Especialidad]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4416b721-57ff-413b-9cb4-93e844f864bf"/>
+		</element>
+		<element kind="staticText" uuid="3bb9ad79-8b0d-4b2b-bb58-5f84dd608e21" x="440" y="0" width="110" height="40" bold="true" hTextAlign="Justified" vTextAlign="Middle">
+			<text><![CDATA[Años de experiencia]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="42496cae-20f4-4747-a0ad-9e33ea8108a8"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<element kind="textField" uuid="7c5881a9-a8ad-45ff-9397-9b98ecdefa13" x="0" y="10" width="110" height="40" hTextAlign="Justified" vTextAlign="Middle">
+				<expression><![CDATA[$F{SSN}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ae30b0b2-8959-4702-92de-3923d1b3bd26"/>
+			</element>
+			<element kind="textField" uuid="4b614a1f-db52-4114-9e77-23cf2f920ecb" x="110" y="10" width="110" height="40" hTextAlign="Justified" vTextAlign="Middle">
+				<expression><![CDATA[$F{Nombre}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c0bd572a-0aca-4547-b87c-e17573b39108"/>
+			</element>
+			<element kind="textField" uuid="9992a82a-4094-4412-b89a-a64ae62e0b7d" x="220" y="10" width="110" height="40" hTextAlign="Justified" vTextAlign="Middle">
+				<expression><![CDATA[$F{Apellido}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8e876e9f-f88c-4219-8afe-7d10f66eeb14"/>
+			</element>
+			<element kind="textField" uuid="98804fa4-eaf2-4098-bdd2-32b4faf4bd9b" x="330" y="10" width="110" height="40" hTextAlign="Justified" vTextAlign="Middle">
+				<expression><![CDATA[$F{Especialidad}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4416b721-57ff-413b-9cb4-93e844f864bf"/>
+			</element>
+			<element kind="textField" uuid="36f7aa69-90bd-4781-836b-d16f4b479901" x="440" y="10" width="110" height="40" pattern="#,###.###;#,###.###-" hTextAlign="Justified" vTextAlign="Middle">
+				<expression><![CDATA[$F{Anios_Experiencia}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="42496cae-20f4-4747-a0ad-9e33ea8108a8"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="11" splitType="Stretch"/>
+	<pageFooter height="12" splitType="Stretch"/>
+	<summary height="37" splitType="Stretch">
+		<element kind="rectangle" uuid="e105c055-b7c4-4943-b22b-7bdc4f7278ea" mode="Opaque" x="2" y="0" width="550" height="1" backcolor="#030000"/>
+		<element kind="textField" uuid="3889938d-f5e4-46f2-8174-b7cc513cb5e5" x="5" y="3" width="100" height="30" pattern="MMM d, yyyy h:mm:ss a z">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</summary>
+</jasperReport>
