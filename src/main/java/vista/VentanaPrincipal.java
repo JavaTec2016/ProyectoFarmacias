@@ -7,6 +7,7 @@ package vista;
 import conexionBD.ConexionBDLite;
 import controlador.DAO;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import modelo.*;
 import reportes.Reportador;
 
@@ -1013,7 +1014,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_panelMedicamentosMouseReleased
 
     private void rptFarmaciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptFarmaciaActionPerformed
-        // TODO add your handling code here:
+        Reportador.verReporte("Farmacia");
+        JOptionPane.showMessageDialog(this, "Generando reporte, espere un momento", "Generando reporte", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_rptFarmaciaActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
@@ -1027,30 +1029,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void rptMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptMedicoActionPerformed
         Reportador.verReporte("Medico");
+        JOptionPane.showMessageDialog(this, "Generando reporte, espere un momento...", "Generando reporte", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_rptMedicoActionPerformed
 
     private void rptPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptPacienteActionPerformed
         Reportador.verReporte("Paciente");
+        JOptionPane.showMessageDialog(this, "Generando reporte, espere un momento...", "Generando reporte", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_rptPacienteActionPerformed
 
     private void rptFarmaceuticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptFarmaceuticasActionPerformed
-        // TODO add your handling code here:
+        Reportador.verReporte("Farmaceutica");
+        JOptionPane.showMessageDialog(this, "Generando reporte, espere un momento...", "Generando reporte", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_rptFarmaceuticasActionPerformed
 
     private void rptRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptRecetasActionPerformed
-        // TODO add your handling code here:
+        Reportador.verReporte("Receta");
+        JOptionPane.showMessageDialog(this, "Generando reporte, espere un momento...", "Generando reporte", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_rptRecetasActionPerformed
 
     private void rptInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptInventariosActionPerformed
-        // TODO add your handling code here:
+        Reportador.verReporte("Inventario");
+        JOptionPane.showMessageDialog(this, "Generando reporte, espere un momento...", "Generando reporte", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_rptInventariosActionPerformed
 
     private void rptContratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptContratosActionPerformed
-        // TODO add your handling code here:
+        Reportador.verReporte("Contrato");
+        JOptionPane.showMessageDialog(this, "Generando reporte, espere un momento...", "Generando reporte", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_rptContratosActionPerformed
 
     private void rptMedicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptMedicamentosActionPerformed
-        // TODO add your handling code here:
+        Reportador.verReporte("Medicamento");
+        JOptionPane.showMessageDialog(this, "Generando reporte, espere un momento...", "Generando reporte", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_rptMedicamentosActionPerformed
 
     private void viewSupervisoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSupervisoresActionPerformed

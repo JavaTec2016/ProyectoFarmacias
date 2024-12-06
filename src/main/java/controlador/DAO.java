@@ -101,6 +101,7 @@ public class DAO {
 
         try {
             conexionLite.prepararStatement(sql, camposTipos, camposValores);
+            //System.out.println("DAO: " + conexionLite.st);
             return conexionLite.ejecutarInstruccion();
         } catch (SQLException e) {
             System.out.println("Error en la insercion: " + e.getMessage());
@@ -132,6 +133,7 @@ public class DAO {
         sql = sql.substring(0, corte);
         try {
             conexionLite.prepararStatement(sql, tipos, valores);
+            System.out.println(conexionLite.st);
             conexionLite.ejecutarInstruccion();
             return 0;
         } catch (SQLException e) {
@@ -458,6 +460,7 @@ public class DAO {
             }
             //iniciar un objeto con espacios segun la cantidad de parametros
             args = new Object[cons.getParameterCount()];
+            //System.out.println(Arrays.toString(argTypes) + " , " + Arrays.toString(colu));
             while(rs.next()) {
 
                 for(int j = 0; j < args.length; j++){
@@ -468,7 +471,7 @@ public class DAO {
                     //revisar el tipo de dato del argumento y rellenarlo con un valor nulo
 
                     if(!columna.equalsIgnoreCase(argNames[j])){
-                        System.out.println(columna + " != "+argNames[j] +  " " + j + ":  "+ argTypes[j]);
+                        System.out.println("DAO consulta: CAMPOS IRREGULARES: (" + columna + " != "+argNames[j] +  ") " + j + " TIPO:  "+ argTypes[j]);
                         args[j] = rellenarArgumento(argTypes[j]);
                     }else{
                         //rellenar los argumentos

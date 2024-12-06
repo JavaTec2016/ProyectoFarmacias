@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class ConexionBDLite {
     private Connection conexion;
-    private PreparedStatement st;
+    public PreparedStatement st;
     private static ConexionBDLite conector = null;
     private ResultSet rs;
     private Usuario usr;
@@ -20,7 +20,7 @@ public class ConexionBDLite {
     }
     public Usuario getUsr(){return usr;}
     public int buscarCredenciales(String usuario, String pass) {
-        String url = "jdbc:sqlite:C:/Users/TheGr/SQLite/FarmaciasRX.db";
+        String url = "jdbc:sqlite:C:/Users/TheGr/Documents/NetBeansProjects/ProyectoGUI/BD/FarmaciasRX.db";
         try {
             Class.forName("org.sqlite.JDBC");
 
@@ -58,7 +58,7 @@ public class ConexionBDLite {
         try {
             Class.forName("org.sqlite.JDBC");
             //si la url está incorrecta, va a generar una BD en donde diga y con el nombre que diga, aguas
-            String url = "jdbc:sqlite:C:/Users/TheGr/SQLite/FarmaciasRX.db";
+            String url = "jdbc:sqlite:C:/Users/TheGr/Documents/NetBeansProjects/ProyectoGUI/BD/FarmaciasRX.db";
             conexion = DriverManager.getConnection(url, usuario, pass);
             System.out.println("Atte el licenciado GG");
 
@@ -99,7 +99,7 @@ public class ConexionBDLite {
             tipo = ix == -1 ? tipo : tipo.substring(ix+1);
             switch (tipo.toLowerCase()){
                 case "smallint", "short": st.setShort(indice, (short)valores[i]); break;
-                case "int": st.setInt(indice, (int)valores[i]); break;
+                case "int", "integer": st.setInt(indice, (int)valores[i]); break;
                 case "byte": st.setByte(indice, (byte)valores[i]); break;
                 case "varchar", "char", "mediumtext", "string": st.setString(indice, (String)valores[i]); break;
                 case "float": st.setFloat(indice, (float)valores[i]); break;
@@ -141,7 +141,7 @@ public class ConexionBDLite {
                 //case "boolean": st.setBoolean();
             }
         }
-        System.out.println("CONEXX: " + st);
+        //System.out.println("CONEXX: " + st);
     }
     ///////MANEJO DE TRANSACCIONES
     public  void establecerAutocommit(boolean b){

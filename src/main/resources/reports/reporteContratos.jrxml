@@ -1,0 +1,125 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="reporteContratos" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7b225eb8-62c6-43b6-a4ad-7d8985c44998">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="adaptus3"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<query language="sql"><![CDATA[SELECT * FROM farmacia_contrato_farmaceutica]]></query>
+	<field name="Id_Contrato" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Id_Contrato"/>
+		<property name="com.jaspersoft.studio.field.label" value="Id_Contrato"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia_contrato_farmaceutica"/>
+	</field>
+	<field name="Nombre_Farmacia" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre_Farmacia"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre_Farmacia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia_contrato_farmaceutica"/>
+	</field>
+	<field name="Nombre_Farmaceutica" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre_Farmaceutica"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre_Farmaceutica"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia_contrato_farmaceutica"/>
+	</field>
+	<field name="Fecha_inicio" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Fecha_inicio"/>
+		<property name="com.jaspersoft.studio.field.label" value="Fecha_inicio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia_contrato_farmaceutica"/>
+	</field>
+	<field name="Fecha_fin" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Fecha_fin"/>
+		<property name="com.jaspersoft.studio.field.label" value="Fecha_fin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia_contrato_farmaceutica"/>
+	</field>
+	<field name="Contenido" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Contenido"/>
+		<property name="com.jaspersoft.studio.field.label" value="Contenido"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia_contrato_farmaceutica"/>
+	</field>
+	<field name="SSN_Supervisor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="SSN_Supervisor"/>
+		<property name="com.jaspersoft.studio.field.label" value="SSN_Supervisor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia_contrato_farmaceutica"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="staticText" uuid="20b64baa-86f2-4cc0-89d5-f81137c4f069" x="340" y="10" width="199" height="30" fontSize="18.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Reporte de contratos]]></text>
+		</element>
+		<element kind="staticText" uuid="347b0065-2d89-4a32-8693-135f8127ebea" x="380" y="40" width="149" height="20" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Reporte de sucursales]]></text>
+		</element>
+		<element kind="rectangle" uuid="8dae8eee-84c4-47dd-89ae-b5679e8ac45b" mode="Opaque" x="0" y="70" width="550" height="1" backcolor="#030000"/>
+		<element kind="staticText" uuid="ee5288f3-eaf1-4361-85a2-cd8ce086fef2" x="0" y="10" width="190" height="40" fontSize="24.0" italic="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Farmacias R-X]]></text>
+		</element>
+	</title>
+	<pageHeader height="14" splitType="Stretch"/>
+	<columnHeader height="45" splitType="Stretch">
+		<element kind="staticText" uuid="c5eeb93b-2a33-4fa0-b737-31dff561321c" x="0" y="0" width="81" height="30" fontSize="8.0" bold="true" vTextAlign="Middle">
+			<text><![CDATA[ID]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0697deb7-9e21-4839-b6fe-06f67d131b43"/>
+		</element>
+		<element kind="staticText" uuid="4727c4e2-e3c2-4585-86ff-ff3f74b22abb" x="81" y="0" width="79" height="30" fontSize="8.0" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Farmacia]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b6c24091-90ea-420d-894e-aa1a5d060070"/>
+		</element>
+		<element kind="staticText" uuid="13074c7f-bc1e-490b-9ee7-aa78ce65638b" x="160" y="0" width="79" height="30" fontSize="8.0" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Farmaceutica]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="340dff67-fedc-481b-9b12-55ac630f8e05"/>
+		</element>
+		<element kind="staticText" uuid="92b308e2-f725-495e-a5ac-0cc8d05ac388" x="239" y="0" width="79" height="30" fontSize="8.0" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Fecha de inicio]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d6216e3d-e0bc-460c-b0b1-072b8eb4f299"/>
+		</element>
+		<element kind="staticText" uuid="0a31ec44-9349-4826-82e6-94fa50a8a1db" x="318" y="0" width="79" height="30" fontSize="8.0" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Fecha de fin]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4340747c-babf-45dd-882e-610a43db43a4"/>
+		</element>
+		<element kind="staticText" uuid="bce3aa28-7491-43dc-aa82-ef952d5d588e" x="397" y="0" width="79" height="30" fontSize="8.0" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Contenido]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c862a082-71a3-4917-b80d-32218bdb6b51"/>
+		</element>
+		<element kind="staticText" uuid="40df946c-2dd6-4249-827c-0523ea6dc327" x="476" y="0" width="79" height="30" fontSize="8.0" bold="true" vTextAlign="Middle">
+			<text><![CDATA[SSN de médico supervisor]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="755f6189-d241-46e8-b41b-8a2561db6270"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<element kind="textField" uuid="31109da5-3e36-4fda-9b67-e2fb502d701b" x="0" y="0" width="81" height="30" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{Id_Contrato}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0697deb7-9e21-4839-b6fe-06f67d131b43"/>
+			</element>
+			<element kind="textField" uuid="2dfd76c6-8250-49d5-a96e-0521ff63a367" x="81" y="0" width="79" height="30" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{Nombre_Farmacia}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b6c24091-90ea-420d-894e-aa1a5d060070"/>
+			</element>
+			<element kind="textField" uuid="fac52bf1-215a-466a-8e77-78cfbb074cda" x="160" y="0" width="79" height="30" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{Nombre_Farmaceutica}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="340dff67-fedc-481b-9b12-55ac630f8e05"/>
+			</element>
+			<element kind="textField" uuid="06d74d7a-fc54-4a5c-a470-297e7d56172e" x="239" y="0" width="79" height="30" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{Fecha_inicio}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d6216e3d-e0bc-460c-b0b1-072b8eb4f299"/>
+			</element>
+			<element kind="textField" uuid="495bc307-c805-499b-949c-ece7ade7af7c" x="318" y="0" width="79" height="30" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{Fecha_fin}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4340747c-babf-45dd-882e-610a43db43a4"/>
+			</element>
+			<element kind="textField" uuid="9b58388a-ca24-44ba-8190-d86a61bc4bac" x="397" y="0" width="79" height="30" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{Contenido}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c862a082-71a3-4917-b80d-32218bdb6b51"/>
+			</element>
+			<element kind="textField" uuid="33400fcf-3ace-4ea3-81b9-f0fa7e7bea01" x="476" y="0" width="79" height="30" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{SSN_Supervisor}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="755f6189-d241-46e8-b41b-8a2561db6270"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="8" splitType="Stretch"/>
+	<pageFooter height="15" splitType="Stretch"/>
+	<summary height="43" splitType="Stretch">
+		<element kind="rectangle" uuid="eae07661-04bc-4d3f-b5ef-e63caf3cac6d" mode="Opaque" x="2" y="0" width="550" height="1" backcolor="#030000"/>
+		<element kind="textField" uuid="20250435-9c50-43f4-bdf8-866e39ee5b46" x="5" y="3" width="100" height="30" pattern="MMM d, yyyy h:mm:ss a z">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</summary>
+</jasperReport>

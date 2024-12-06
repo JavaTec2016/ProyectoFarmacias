@@ -27,7 +27,7 @@ public class Medicamento extends ModeloBD{
         return new String[]{"VARCHAR", "VARCHAR", "VARCHAR"};
     }
     public static boolean[] obtenerNoNulos() {
-        return new boolean[]{true, true};
+        return new boolean[]{true, true, true};
     }
     public static int[] obtenerLongitudes() {
         return new int[]{45, 200, 50};

@@ -307,7 +307,7 @@ public class AccionConfigurable extends javax.swing.JFrame {
 
 
                     Registrable r = ModeloBD.instanciar(datos, tabla);
-                    //System.out.println(r);
+
                     DAO.d.agregarPreparedUniversal(r);
 
                     JOptionPane.showMessageDialog(getContentPane(), "Registro exitoso", "Aviso de inserción", JOptionPane.INFORMATION_MESSAGE);
@@ -335,7 +335,13 @@ public class AccionConfigurable extends javax.swing.JFrame {
                         Object[] primariaValores = Componedor.obtenerFiltrosValores(pk, indicesPrimarias);
 
                         if(validarFormulario(pk, obligatorios, longitudes, tipos, checksBusqueda)!=0) return;
-                            
+
+                        for(int i : indicesPrimarias){
+                            if(!checksBusqueda[i].isSelected()){
+                                JOptionPane.showMessageDialog(getContentPane(), "Asegurese de habilitar todas las llaves primarias", "Eliminacion riesgosa", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                        }
                         //es obligatorio dar las llaves primarias (se necesitara un boton de llaves primarias aqui)
                         DAO.d.EliminarPreparedUniversal(tabla, primariaNombres, primariaTipos, primariaValores);
                         JOptionPane.showMessageDialog(getContentPane(), "Eliminacion completada");

@@ -1,0 +1,73 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="reporteMedicamentos" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6a60207b-9832-4c61-9f12-479abd636816">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="adaptus3"/>
+	<query language="SQL"><![CDATA[SELECT * FROM Medicamento]]></query>
+	<field name="Nombre_Comercial" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre_Comercial"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre_Comercial"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medicamento"/>
+	</field>
+	<field name="Formula" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Formula"/>
+		<property name="com.jaspersoft.studio.field.label" value="Formula"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medicamento"/>
+	</field>
+	<field name="Nombre_Farmaceutica" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre_Farmaceutica"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre_Farmaceutica"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medicamento"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="staticText" uuid="5e2c2a21-1dfd-4de6-ab2f-83db480a8691" x="340" y="10" width="199" height="30" fontSize="18.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Reporte de productos]]></text>
+		</element>
+		<element kind="staticText" uuid="5d9e65bd-ed92-425d-b6bc-83c519521bb8" x="380" y="40" width="149" height="20" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Medicamentos disponibles]]></text>
+		</element>
+		<element kind="rectangle" uuid="162702d2-f9bc-4b4d-bf5b-75b4bbf8e0a5" mode="Opaque" x="0" y="70" width="550" height="1" backcolor="#030000"/>
+		<element kind="staticText" uuid="58e14b25-74c3-4302-a97a-2550caebf67e" x="0" y="10" width="190" height="40" fontSize="24.0" italic="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Farmacias R-X]]></text>
+		</element>
+	</title>
+	<pageHeader height="10" splitType="Stretch"/>
+	<columnHeader height="45" splitType="Stretch">
+		<element kind="staticText" uuid="e79e5578-ba0a-443b-b1ba-a58a7999d206" x="0" y="0" width="185" height="30" bold="true">
+			<text><![CDATA[Nombre comercial]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dfce3c44-8815-4579-92d2-ee231d9f7727"/>
+		</element>
+		<element kind="staticText" uuid="4865baca-4ee7-404f-a0df-2f818191b161" x="185" y="0" width="185" height="30" bold="true">
+			<text><![CDATA[Formula]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="101ff992-a19b-4159-92d0-c1f9e950c25d"/>
+		</element>
+		<element kind="staticText" uuid="d5a93103-1ef5-4092-b7e4-2915d657418d" x="370" y="0" width="185" height="30" bold="true">
+			<text><![CDATA[Farmaceutica]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fd39adda-d369-492d-823e-1c60411bf9c7"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<element kind="textField" uuid="dc6b52ea-8f85-41ca-b094-e243fec72cc7" x="0" y="0" width="185" height="30">
+				<expression><![CDATA[$F{Nombre_Comercial}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dfce3c44-8815-4579-92d2-ee231d9f7727"/>
+			</element>
+			<element kind="textField" uuid="61adc5cf-0612-4c24-b043-d09df582146d" x="185" y="0" width="185" height="30">
+				<expression><![CDATA[$F{Formula}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="101ff992-a19b-4159-92d0-c1f9e950c25d"/>
+			</element>
+			<element kind="textField" uuid="5f743db0-134b-46e1-b192-23521890d597" x="370" y="0" width="185" height="30">
+				<expression><![CDATA[$F{Nombre_Farmaceutica}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fd39adda-d369-492d-823e-1c60411bf9c7"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="10" splitType="Stretch"/>
+	<pageFooter height="10" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch">
+		<element kind="rectangle" uuid="e89551df-b4cc-4724-aaa8-4d7e45d0a1ba" mode="Opaque" x="2" y="0" width="550" height="1" backcolor="#030000"/>
+		<element kind="textField" uuid="91243e6b-3e5c-4524-be82-cbcbdf8fd85d" x="5" y="3" width="100" height="30" pattern="MMM d, yyyy h:mm:ss a z">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</summary>
+</jasperReport>

@@ -94,11 +94,11 @@ public class Reportador {
         switch (nombre){
             case "Paciente": return "src/main/resources/reports/reportePacientes.jrxml";
             case "Medico": return "src/main/resources/reports/reporteMedicos.jrxml";
-            case "Farmacia": return "src/main/resources/reports/reporteFarmacia.jrxml";
-            case "Farmaceutica": return "src/main/resources/reports/reporteFarmaceutica.jrxml";
-            case "Receta": return "src/main/resources/reports/reporteReceta.jrxml";
-            case "Inventario": return "src/main/resources/reports/reporteInventario.jrxml";
-            case "Contrato": return "src/main/resources/reports/reporteContrato.jrxml";
+            case "Farmacia": return "src/main/resources/reports/reporteFarmacias.jrxml";
+            case "Farmaceutica": return "src/main/resources/reports/reporteFarmaceuticas.jrxml";
+            case "Receta": return "src/main/resources/reports/reporteRecetas.jrxml";
+            case "Inventario": return "src/main/resources/reports/reporteInventarios.jrxml";
+            case "Contrato": return "src/main/resources/reports/reporteContratos.jrxml";
             case "Medicamento": return "src/main/resources/reports/reporteMedicamentos.jrxml";
         }
         return "";

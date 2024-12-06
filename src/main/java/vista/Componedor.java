@@ -274,7 +274,7 @@ public abstract class Componedor {
             String tipo = tipos[i];
             JComponent input = inputs.get(i+j);
 
-            System.out.println("COMPONE: campo " + i + " es " + input.getClass().getName());
+            //System.out.println("COMPONE: campo " + i + " es " + input.getClass().getName());
             //identificar el componente a parsear
             if(campo.equalsIgnoreCase("JDateField")){//dias, meses, anios
                 String fecha = ""+((JComboBox<String>)inputs.get(i+j)).getSelectedItem();
@@ -311,11 +311,11 @@ public abstract class Componedor {
             }
 
             if(!input.isEnabled()){
-                System.out.println("COMPONE: " + i + " nulo");
+                //System.out.println("COMPONE: " + i + " nulo");
                 out[i] = null;
             }
         }
-        System.out.println("COMPONE: resultao" + Arrays.toString(out));
+        //System.out.println("COMPONE: resultao" + Arrays.toString(out));
         return out;
     }
     public static void columnasTabla(JTable tabla, String modelo){
@@ -392,6 +392,10 @@ public abstract class Componedor {
                     break;
                 case "jdecimalfield":
                     String[] decimal = dato.toString().split(".");
+                    if(decimal.length < 1){
+                        //System.out.println("COMPONE> NULO" + dato);
+                        decimal = new String[]{dato.toString(), "00"};
+                    }
                     ((JTextField)inputs.get(i+j)).setText(decimal[0]);
                     j++;
                     ((JComboBox)inputs.get(i+j)).setSelectedItem(decimal[1]);

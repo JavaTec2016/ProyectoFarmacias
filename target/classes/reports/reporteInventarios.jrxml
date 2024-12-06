@@ -1,0 +1,91 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="reporteInventarios" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86d9dae4-f673-47cf-8b6d-b3802c895647">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="adaptus3"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="WHERE" class="java.lang.String"/>
+	<query language="sql"><![CDATA[SELECT *
+FROM farmacia_inventario WHERE Nombre_Farmacia LIKE  '$P!{WHERE}%']]></query>
+	<field name="Nombre_Farmacia" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre_Farmacia"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre_Farmacia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Farmacia_Inventario"/>
+	</field>
+	<field name="Medicamento_Precio" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Medicamento_Precio"/>
+		<property name="com.jaspersoft.studio.field.label" value="Medicamento_Precio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Farmacia_Inventario"/>
+	</field>
+	<field name="Nombre_Farmaceutica" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre_Farmaceutica"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre_Farmaceutica"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Farmacia_Inventario"/>
+	</field>
+	<field name="Nombre_Comercial" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre_Comercial"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre_Comercial"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Farmacia_Inventario"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="82" splitType="Stretch">
+		<element kind="staticText" uuid="45b04bb3-254a-41a9-8eab-aaaf860ce976" x="340" y="10" width="199" height="30" fontSize="18.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Reporte de inventarios]]></text>
+		</element>
+		<element kind="rectangle" uuid="ce4b7c3c-05d0-4545-b28f-f9ec5b924c20" mode="Opaque" x="0" y="70" width="550" height="1" backcolor="#030000"/>
+		<element kind="staticText" uuid="fefdf93e-e9b5-481d-a04c-7ef45437ba8e" x="0" y="10" width="190" height="40" fontSize="24.0" bold="true" italic="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Farmacias R-X]]></text>
+		</element>
+		<element kind="textField" uuid="9af85695-40d6-4596-914c-ef5aa894008e" x="417" y="40" width="118" height="30" fontSize="8.0">
+			<expression><![CDATA[$P{WHERE}]]></expression>
+		</element>
+		<element kind="staticText" uuid="097e9d56-1a1a-4be1-91fd-d5d15be1f44e" x="377" y="40" width="40" height="19" fontSize="8.0">
+			<text><![CDATA[se buscó: ]]></text>
+		</element>
+	</title>
+	<pageHeader height="8" splitType="Stretch"/>
+	<columnHeader height="61" splitType="Stretch">
+		<element kind="staticText" uuid="93cd11b8-6bbf-4b3a-bbf5-cd42d7365d97" x="0" y="0" width="141" height="30" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Farmacia]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5a01540-6c96-48ba-ac60-12d08188c51a"/>
+		</element>
+		<element kind="staticText" uuid="c73836b2-bc06-4c5a-b7b4-06baa0ce1c12" x="417" y="0" width="138" height="30" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Precio]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f71c3db-787f-40fb-8e46-2d3b7f5ea0f6"/>
+		</element>
+		<element kind="staticText" uuid="c829cd14-18c8-4be6-bd48-5d7da9d56c56" x="141" y="0" width="138" height="30" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Farmaceutica]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6a016c5f-033f-4386-b3bf-2c32dcc51c38"/>
+		</element>
+		<element kind="staticText" uuid="d9076e83-7d46-41a3-8ad1-25d24ddccb08" x="279" y="0" width="138" height="30" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Medicamento]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1053c4a0-5108-4ef0-aea0-01a6aec6c02f"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<element kind="textField" uuid="d8ae0974-43a1-4b58-a7fc-8eeec0261b03" x="0" y="0" width="141" height="30">
+				<expression><![CDATA[$F{Nombre_Farmacia}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5a01540-6c96-48ba-ac60-12d08188c51a"/>
+			</element>
+			<element kind="textField" uuid="585f1c54-8e00-44f2-b0a5-896742dab1a8" x="417" y="0" width="138" height="30" pattern="¤#,##0.##;¤-#,##0.##">
+				<expression><![CDATA[$F{Medicamento_Precio}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f71c3db-787f-40fb-8e46-2d3b7f5ea0f6"/>
+			</element>
+			<element kind="textField" uuid="a19ee12f-af84-4bcd-af57-0ef1d4ef4db7" x="141" y="0" width="138" height="30">
+				<expression><![CDATA[$F{Nombre_Farmaceutica}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6a016c5f-033f-4386-b3bf-2c32dcc51c38"/>
+			</element>
+			<element kind="textField" uuid="5e875a22-98a4-487b-bc64-427223fa1a32" x="279" y="0" width="138" height="30">
+				<expression><![CDATA[$F{Nombre_Comercial}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1053c4a0-5108-4ef0-aea0-01a6aec6c02f"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="8" splitType="Stretch"/>
+	<pageFooter height="5" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch">
+		<element kind="rectangle" uuid="652115e5-ceb8-4ab1-a499-d54ad2397b20" mode="Opaque" x="2" y="0" width="550" height="1" backcolor="#030000"/>
+		<element kind="textField" uuid="f9d68835-1eb1-416f-be6c-ac72c8958cce" x="5" y="3" width="100" height="30" pattern="MMM d, yyyy h:mm:ss a z">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</summary>
+</jasperReport>

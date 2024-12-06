@@ -3,19 +3,19 @@ package modelo;
 public class Recetas extends ModeloBD {
     String Id_Receta;
     String Fecha;
-    String Unidades;
-    String SSN_Paciente;
+    Integer Unidades;
+    String SSN_Pacientes;
     String SSN_Cabecera;
-    String Farmaceutica_Nombre;
+    String Nombre_Farmaceutica;
     String Nombre_comercial;
 
-    public Recetas(String idReceta, String fecha, String unidades, String SSN_Paciente, String SSN_Cabecera, String farmaceutica_Nombre, String nombre_comercial) {
+    public Recetas(String idReceta, String fecha, Integer unidades, String SSN_Pacientes, String SSN_Cabecera, String Nombre_Farmaceutica, String nombre_comercial) {
         Id_Receta = idReceta;
         Fecha = fecha;
         Unidades = unidades;
-        this.SSN_Paciente = SSN_Paciente;
+        this.SSN_Pacientes = SSN_Pacientes;
         this.SSN_Cabecera = SSN_Cabecera;
-        Farmaceutica_Nombre = farmaceutica_Nombre;
+        this.Nombre_Farmaceutica = Nombre_Farmaceutica;
         Nombre_comercial = nombre_comercial;
     }
 
@@ -25,9 +25,9 @@ public class Recetas extends ModeloBD {
                 "Id='" + Id_Receta + '\'' +
                 ", Fecha='" + Fecha + '\'' +
                 ", Unidades='" + Unidades + '\'' +
-                ", SSN_Paciente='" + SSN_Paciente + '\'' +
+                ", SSN_Paciente='" + SSN_Pacientes + '\'' +
                 ", SSN_Cabecera='" + SSN_Cabecera + '\'' +
-                ", Farmaceutica_Nombre='" + Farmaceutica_Nombre + '\'' +
+                ", Farmaceutica_Nombre='" + Nombre_Farmaceutica + '\'' +
                 ", Nombre_comercial='" + Nombre_comercial + '\'' +
                 '}';
     }
@@ -36,7 +36,7 @@ public class Recetas extends ModeloBD {
         return new boolean[]{true, true, true, true, true, true, true};
     }
     public static String[] obtenerTipoDato(){
-        return new String[]{"VARCHAR", "DATE", "SMALLINT", "CHAR", "CHAR", "VARCHAR", "VARCHAR"};
+        return new String[]{"VARCHAR", "DATE", "INT", "CHAR", "CHAR", "VARCHAR", "VARCHAR"};
     }
     public static boolean[] obtenerNoNulos() {
         return new boolean[]{true, true, true, true, true, true, true};
