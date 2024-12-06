@@ -285,7 +285,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         bd.abrirConexion(cajaUsuario.getText(), pass);
         
         irAlPanel(bd.getUsr());
-        new Reportador().compilarReporte2();
+        new Reportador().compilarReporte3();
         dispose();
     }//GEN-LAST:event_btnLoginMouseReleased
 

@@ -106,6 +106,7 @@ public class ConexionBDLite {
                 case "decimal": st.setBigDecimal(indice, (BigDecimal)valores[i]); break;
                 case "date": st.setDate(indice, (Date)valores[i]); break;
             }
+            System.out.println(st.getParameterMetaData());
         }
     }
     public void prepararStatement(String inst, String[] tipos, Object[] valores, boolean parcial) throws SQLException {
@@ -136,7 +137,6 @@ public class ConexionBDLite {
                 //case "boolean": st.setBoolean();
             }
         }
-        System.out.println(st + " CONEIXON");
     }
     ///////MANEJO DE TRANSACCIONES
     public  void establecerAutocommit(boolean b){
