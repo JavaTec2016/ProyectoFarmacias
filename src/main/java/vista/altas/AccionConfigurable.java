@@ -263,6 +263,7 @@ public class AccionConfigurable extends javax.swing.JFrame {
                 });
             }
         });
+
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -304,7 +305,9 @@ public class AccionConfigurable extends javax.swing.JFrame {
                     byte estado = validarFormulario(datos, obligatorios, longitudes, tipos);
                     if(estado!=0)return;
 
+
                     Registrable r = ModeloBD.instanciar(datos, tabla);
+                    //System.out.println(r);
                     DAO.d.agregarPreparedUniversal(r);
 
                     JOptionPane.showMessageDialog(getContentPane(), "Registro exitoso", "Aviso de inserción", JOptionPane.INFORMATION_MESSAGE);
@@ -331,7 +334,7 @@ public class AccionConfigurable extends javax.swing.JFrame {
                         String[] primariaTipos = Componedor.obtenerFiltrosNombres(tipos, indicesPrimarias);
                         Object[] primariaValores = Componedor.obtenerFiltrosValores(pk, indicesPrimarias);
 
-                        if(validarFormulario(pk, obligatorios, longitudes, tipos)!=0) return;
+                        if(validarFormulario(pk, obligatorios, longitudes, tipos, checksBusqueda)!=0) return;
                             
                         //es obligatorio dar las llaves primarias (se necesitara un boton de llaves primarias aqui)
                         DAO.d.EliminarPreparedUniversal(tabla, primariaNombres, primariaTipos, primariaValores);
@@ -376,6 +379,15 @@ public class AccionConfigurable extends javax.swing.JFrame {
                     public void actionPerformed(ActionEvent e) {
                         Object[] pk = extraerDatos();
                         System.out.println("consultadera: " + Arrays.toString(pk));
+                        if(pk == null) return;
+
+                        if(validarFormulario(pk, obligatorios, longitudes, tipos, checksBusqueda)!=0) return;
+
+                        int[] indicesValidos = Componedor.ubicarCamposValidos(pk);
+                        ArrayList<Registrable> rs = formatearConsulta(indicesValidos, pk);
+                        System.out.println("uy uy uy " + rs.size());
+                        Componedor.limpiarTabla(tablaAgregar);
+                        rs.forEach(reg ->{Componedor.filaTabla(tablaAgregar, reg);});
 
                     }
                 };
@@ -383,10 +395,11 @@ public class AccionConfigurable extends javax.swing.JFrame {
         }
         btnPrimario.addActionListener(listener);
     }
+
     public void tablaClick(){
         int rowa = tablaAgregar.getSelectedRow();
         Object[] selector = Componedor.extraerFila(tablaAgregar, rowa);
-        System.out.println(Arrays.toString(selector));
+        //System.out.println(Arrays.toString(selector));
         Componedor.autoRellenar(inputs, campos, selector);
     }
     public void desactivarInputs(){
@@ -403,7 +416,7 @@ public class AccionConfigurable extends javax.swing.JFrame {
                 public void actionPerformed(ActionEvent e) {
 
                     JComponent[] inps = obtenerComponentes(indice);
-                    System.out.println(inps.length);
+                    //System.out.println(inps.length);
 
                     for(int i = 0; i < inps.length; i++){
                         inps[i].setEnabled(jcaja.isSelected());
@@ -468,6 +481,38 @@ public class AccionConfigurable extends javax.swing.JFrame {
         //todo bonito
         return 0;
     }
+    public byte validarFormulario(Object[] datos, boolean [] nonulos, int[] longitudes, String[] tipos, JCheckBox[] checks){
+        for(int i = 0; i < datos.length; i++){
+
+            Object dato = datos[i];
+            boolean nonulo = nonulos[i];
+            int longitud = longitudes[i];
+            String tipo = tipos[i];
+
+            //System.out.println(dato + " , " + tipo + ", " + longitud);
+            System.out.println( "VALIDA : "+labels[i] + ", " + dato +", " + checksBusqueda[i].isSelected());
+            if(dato==null){
+                if((nonulo || esPrimario(i)) && checks[i].isSelected()){
+                    //contrastar no nulos con el modelo y verificar
+                    JOptionPane.showMessageDialog(getContentPane(), "El campo '"+labels[i]+"' no debe ser nulo", "Datos incorrectos", JOptionPane.ERROR_MESSAGE);
+                    return 1;
+                }
+            }
+            else if (tipo.equalsIgnoreCase("char") && dato.toString().length() > longitud ){
+                JOptionPane.showMessageDialog(getContentPane(), "la longitud de '"+labels[i]+"' ("+dato.toString().length()+") debe ser no mayor a "+longitud, "Datos incorrectos", JOptionPane.ERROR_MESSAGE);
+                return 2;
+            }
+            else if(longitud > 0 && dato.toString().length() > longitud){
+                JOptionPane.showMessageDialog(getContentPane(), "la longitud de '"+labels[i]+"' ("+dato.toString().length()+") no debe exceder "+longitud, "Datos incorrectos", JOptionPane.ERROR_MESSAGE);
+                return 3;
+            }
+            //en el caso optimo estos deberian cacharse con eventos de teclado
+            //if dato excede longitud maxima
+            //if dato no es del tipo correcto
+        }
+        //todo bonito
+        return 0;
+    }
     public JButton botonNuevo(String t, Color fg, Color bg, int x, int y, int w, int h){
         JButton btn = new JButton(t);
         btn.setBackground(bg);
@@ -485,8 +530,9 @@ public class AccionConfigurable extends javax.swing.JFrame {
         for(JComponent in : inputs){
             inps[i] = in;
             try{
-                Componedor.extraerDatos(campos, tipos, inputs);
+                Componedor.extraerDatos(campos, tipos, inputs, i);
             }catch (NumberFormatException e){
+                System.out.println(i+", " + inputs.size());
                 Object tope = Componedor.maximo(tipos[i]);
                 JOptionPane.showMessageDialog(getContentPane(), "El campo '"+labels[i]+"' solo admite numeros"+
                         (Integer.parseInt(tope.toString()) > 0 ? " no mayores a " + tope : ""), "Error de datos", JOptionPane.ERROR_MESSAGE);
@@ -494,7 +540,31 @@ public class AccionConfigurable extends javax.swing.JFrame {
             }
             i++;
         }
+        i--;
+        try{
+            Componedor.extraerDatos(campos, tipos, inps);
+        }catch (NumberFormatException e){
+            Object tope = Componedor.maximo(tipos[i]);
+            JOptionPane.showMessageDialog(getContentPane(), "El campo '"+labels[i]+"' solo admite numeros"+
+                    (Integer.parseInt(tope.toString()) > 0 ? " no mayores a " + tope : ""), "Error de datos", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
         return Componedor.extraerDatos(campos, tipos, inps);
+    }
+    public int[] primaryValidas(){
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        for(int i : indicesPrimarias){
+            if(!checksBusqueda[i].isEnabled() || (checksBusqueda[i].isEnabled() && checksBusqueda[i].isSelected())){
+                a.add(i);
+            }
+        }
+        int[] o = new int[a.size()];
+        int j = 0;
+        for(int i : a){
+            o[j]=i;
+            j++;
+        }
+        return o;
     }
     public ArrayList<Registrable> formatearConsulta(int[] indices, Object[] datos){
         String[] filtroNombres = Componedor.obtenerFiltrosNombres(ModeloBD.nombresDe(tabla), indices);
@@ -503,6 +573,7 @@ public class AccionConfigurable extends javax.swing.JFrame {
         //el dao excluye coindicencias parciales, habra que arreglarlo
         //arreglada 1, dao y conexionBDLite
 
+        //System.out.println(Arrays.toString(indices));
 
         return DAO.d.consultarPreparedUniversal(tabla, new String[]{"*"}, filtroNombres, filtrosTipos, filtrosValores, true);
     }
@@ -511,18 +582,20 @@ public class AccionConfigurable extends javax.swing.JFrame {
         Object[] datos = null;
         try {
             datos = extraerDatos();
+            //System.out.println(Arrays.toString(datos));
             if(datos == null) return;
         } catch (NumberFormatException e) {
-            System.out.println(Arrays.toString(datos));
+            //System.out.println(Arrays.toString(datos));
             //JOptionPane.showMessageDialog(getContentPane(), "la longitud de '"+labels[i]+"' ("+dato.toString().length()+") no debe exceder ", "Datos incorrectos", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        int[] indices = Componedor.ubicarCamposValidos(datos);
+        int[] indices = primaryValidas();
 
         //el dao excluye coindicencias parciales, habra que arreglarlo
         //arreglada 1, dao y conexionBDLite
-
+        System.out.println("CONCAMPOS: " + Arrays.toString(indices) + ", " + Arrays.toString(datos));
         ArrayList<Registrable> rs = formatearConsulta(indices, datos); //DAO.d.consultarPreparedUniversal(tabla, new String[]{"*"}, filtroNombres, filtrosTipos, filtrosValores, true);
+
         System.out.println("uy uy uy " + rs.size());
         Componedor.limpiarTabla(tablaAgregar);
         rs.forEach(reg ->{Componedor.filaTabla(tablaAgregar, reg);});

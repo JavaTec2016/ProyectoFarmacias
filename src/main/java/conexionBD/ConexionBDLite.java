@@ -6,6 +6,7 @@ import modelo.Usuario;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class ConexionBDLite {
@@ -103,10 +104,10 @@ public class ConexionBDLite {
                 case "varchar", "char", "mediumtext", "string": st.setString(indice, (String)valores[i]); break;
                 case "float": st.setFloat(indice, (float)valores[i]); break;
                 case "double": st.setDouble(indice, (double)valores[i]); break;
-                case "decimal": st.setBigDecimal(indice, (BigDecimal)valores[i]); break;
+                case "decimal", "bigdecimal": st.setBigDecimal(indice, (BigDecimal)valores[i]); break;
                 case "date": st.setDate(indice, (Date)valores[i]); break;
             }
-            System.out.println(st.getParameterMetaData());
+            //System.out.println(st.getParameterMetaData());
         }
     }
     public void prepararStatement(String inst, String[] tipos, Object[] valores, boolean parcial) throws SQLException {
@@ -118,7 +119,7 @@ public class ConexionBDLite {
             String tipo = tipos[i];
             int ix = tipo.lastIndexOf('.');
             tipo = ix == -1 ? tipo : tipo.substring(ix+1);
-
+            System.out.println("CONNEXX " + i +": " + tipo);
             switch (tipo.toLowerCase()){
                 case "smallint", "short": st.setShort(indice, (short)valores[i]); break;
                 case "int":
@@ -133,10 +134,14 @@ public class ConexionBDLite {
                 case "float": st.setFloat(indice, (float)valores[i]); break;
                 case "double": st.setDouble(indice, (double)valores[i]); break;
                 case "decimal": st.setBigDecimal(indice, (BigDecimal)valores[i]); break;
-                case "date": st.setDate(indice, (Date)valores[i]); break;
+                case "date":
+                    System.out.println(Date.valueOf((String) valores[i]));
+                    st.setString(indice, (String) valores[i]);
+                    break;
                 //case "boolean": st.setBoolean();
             }
         }
+        System.out.println("CONEXX: " + st);
     }
     ///////MANEJO DE TRANSACCIONES
     public  void establecerAutocommit(boolean b){

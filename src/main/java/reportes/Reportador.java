@@ -90,7 +90,61 @@ public class Reportador {
             e.printStackTrace();
         }
     }
+    public static String getPath(String nombre){
+        switch (nombre){
+            case "Paciente": return "src/main/resources/reports/reportePacientes.jrxml";
+            case "Medico": return "src/main/resources/reports/reporteMedicos.jrxml";
+            case "Farmacia": return "src/main/resources/reports/reporteFarmacia.jrxml";
+            case "Farmaceutica": return "src/main/resources/reports/reporteFarmaceutica.jrxml";
+            case "Receta": return "src/main/resources/reports/reporteReceta.jrxml";
+            case "Inventario": return "src/main/resources/reports/reporteInventario.jrxml";
+            case "Contrato": return "src/main/resources/reports/reporteContrato.jrxml";
+            case "Medicamento": return "src/main/resources/reports/reporteMedicamentos.jrxml";
+        }
+        return "";
+    }
+    public  static void verReporte(String nombre){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String path = getPath(nombre);
 
+                try {
+                    System.out.println("Cargando: " + path);
+
+                    JasperReport rp = JasperCompileManager.compileReport(path);
+                    System.out.println("Cargao: " + path);
+                    JasperPrint print = JasperFillManager.fillReport(rp, null, ConexionBDLite.obtenerConector().getConexion());//.fillReport(report, null, ConexionBDLite.obtenerConector().getConexion());
+                    JasperViewer.viewReport(print, false);
+                } catch (JRException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+    }
+    public  static void verReporte(String nombre, String where){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String path = getPath(nombre);
+
+                try {
+                    System.out.println("Cargando: " + path);
+                    Map<String, Object> params = new HashMap<String, Object>();
+                    if(where != null) params.put("where", where);
+                    else params = null;
+                    JasperReport rp = JasperCompileManager.compileReport(path);
+                    System.out.println("Cargao: " + path);
+                    JasperPrint print = JasperFillManager.fillReport(rp, params, ConexionBDLite.obtenerConector().getConexion());//.fillReport(report, null, ConexionBDLite.obtenerConector().getConexion());
+                    JasperViewer.viewReport(print, false);
+                } catch (JRException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+    }
     public static void main(String[] args) {
 
         //System.out.println("Cargando: " + path);

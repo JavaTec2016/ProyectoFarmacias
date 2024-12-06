@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public abstract class Componedor {
@@ -83,8 +84,10 @@ public abstract class Componedor {
             case "float": return Float.parseFloat(t);
             case "double": return Double.parseDouble(t);
             case "boolean": return t.equalsIgnoreCase("true") ? 1 : 0;
+            case "bigdecimal": return new BigDecimal(t);
             default:
-                System.out.println(tipo.toLowerCase());
+                //System.out.println(tipo.toLowerCase());
+                break;
         }
         return "nose";
     }
@@ -181,24 +184,25 @@ public abstract class Componedor {
             String campo = campos[i];
             String tipo = tipos[i];
             JComponent input = inputs[i+j];
-            if(!input.isEnabled()) {
-                out[i] = null;
-            }
+
             //identificar el componente a parsear
-            else if(campo.equalsIgnoreCase("JDateField")){//dias, meses, anios
-                String fecha = ""+((JComboBox<String>)inputs[i+j]).getSelectedItem();
+            if(campo.equalsIgnoreCase("JDateField")){//dias, meses, anios
+                String dia = ""+((JComboBox<String>)inputs[i+j]).getSelectedItem();
                 j+=1;
-                fecha += "-"+((JComboBox<String>)inputs[i+j]).getSelectedItem();
+                String mes = ""+((JComboBox<String>)inputs[i+j]).getSelectedItem();
                 j+=1;
-                fecha += "-"+((JComboBox<String>)inputs[i+j]).getSelectedItem();
-                out[i] = fecha;
-                if(fecha.length() < 10) out[i] = null;
+                String anio = ""+((JComboBox<String>)inputs[i+j]).getSelectedItem();
+                out[i] = anio+"-"+mes+"-"+dia;
+                System.out.println(out[i].toString());
+                if(out[i].toString().length() < 10) out[i] = null;
+
             }
             else if(campo.equalsIgnoreCase("JDecimalField")){
                 String enteros = ((JTextField)inputs[i+j]).getText();
                 j+=1;
                 String decimal = (String)((JComboBox<String>)inputs[i+j]).getSelectedItem();
                 out[i] = new BigDecimal(enteros+"."+decimal);
+                //System.out.println("COMPONEDOR: " + out[i] + " : " + i);
             }
             else if(campo.equalsIgnoreCase("JNumberField")){
                 out[i] = Integer.parseInt((String) ((JComboBox<String>)input).getSelectedItem());
@@ -213,6 +217,10 @@ public abstract class Componedor {
             else if(input instanceof JCheckBox){
                 out[i] = ((JCheckBox) input).isSelected() ? 1 : 0;
             }
+
+            if(!input.isEnabled()) {
+                out[i] = null;
+            }
         }
         return out;
     }
@@ -222,11 +230,9 @@ public abstract class Componedor {
             String campo = campos[i];
             String tipo = tipos[i];
             JComponent input = inputs.get(i+j);
-            if(!input.isEnabled()) {
-                out[i] = null;
-            }
+
             //identificar el componente a parsear
-            else if(campo.equalsIgnoreCase("JDateField")){//dias, meses, anios
+            if(campo.equalsIgnoreCase("JDateField")){//dias, meses, anios
                 String fecha = ""+((JComboBox<String>)inputs.get(i+j)).getSelectedItem();
                 j+=1;
                 fecha += "-"+((JComboBox<String>)inputs.get(i+j)).getSelectedItem();
@@ -254,7 +260,62 @@ public abstract class Componedor {
             else if(input instanceof JCheckBox){
                 out[i] = ((JCheckBox) input).isSelected() ? 1 : 0;
             }
+
+            if(!input.isEnabled()) {
+                out[i] = null;
+            }
         }
+        return out;
+    }
+    public static Object[] extraerDatos(String[] campos, String[] tipos, ArrayList<JComponent> inputs, int cap) throws NumberFormatException{
+        Object[] out = new Object[campos.length];
+        for(int i = 0, j = 0; i < Math.min(campos.length, cap); i++){
+            String campo = campos[i];
+            String tipo = tipos[i];
+            JComponent input = inputs.get(i+j);
+
+            System.out.println("COMPONE: campo " + i + " es " + input.getClass().getName());
+            //identificar el componente a parsear
+            if(campo.equalsIgnoreCase("JDateField")){//dias, meses, anios
+                String fecha = ""+((JComboBox<String>)inputs.get(i+j)).getSelectedItem();
+                j+=1;
+                fecha += "-"+((JComboBox<String>)inputs.get(i+j)).getSelectedItem();
+                j+=1;
+                fecha += "-"+((JComboBox<String>)inputs.get(i+j)).getSelectedItem();
+                out[i] = fecha;
+
+                if(fecha.length() < 10) out[i] = null;
+            }
+            else if(campo.equalsIgnoreCase("JDecimalField")){
+                String enteros = ((JTextField)inputs.get(i+j)).getText();
+                j+=1;
+                String decimal = (String)((JComboBox<String>)inputs.get(i+j)).getSelectedItem();
+                out[i] = new BigDecimal(enteros+"."+decimal);
+
+            }
+            else if(campo.equalsIgnoreCase("JNumberField")){
+                out[i] = Integer.parseInt((String) ((JComboBox<String>)input).getSelectedItem());
+
+            }
+            else if(input instanceof JTextField){
+
+                out[i] = extraerTexto(((JTextField) input).getText(), tipo);
+
+            }else if(input instanceof JRadioButton){
+                out[i] = ((JRadioButton) input).isSelected() ? 1 : 0;
+
+            }
+            else if(input instanceof JCheckBox){
+                out[i] = ((JCheckBox) input).isSelected() ? 1 : 0;
+
+            }
+
+            if(!input.isEnabled()){
+                System.out.println("COMPONE: " + i + " nulo");
+                out[i] = null;
+            }
+        }
+        System.out.println("COMPONE: resultao" + Arrays.toString(out));
         return out;
     }
     public static void columnasTabla(JTable tabla, String modelo){

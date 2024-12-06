@@ -1,0 +1,112 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="reporteFarmacias" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a33e390a-2b97-4407-9701-e752a509fffa">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="adaptus3"/>
+	<query language="SQL"><![CDATA[SELECT * FROM farmacia]]></query>
+	<field name="Nombre" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia"/>
+	</field>
+	<field name="Ciudad" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Ciudad"/>
+		<property name="com.jaspersoft.studio.field.label" value="Ciudad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia"/>
+	</field>
+	<field name="Calle" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Calle"/>
+		<property name="com.jaspersoft.studio.field.label" value="Calle"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia"/>
+	</field>
+	<field name="Codigo_Postal" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Codigo_Postal"/>
+		<property name="com.jaspersoft.studio.field.label" value="Codigo_Postal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia"/>
+	</field>
+	<field name="Telefono" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Telefono"/>
+		<property name="com.jaspersoft.studio.field.label" value="Telefono"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia"/>
+	</field>
+	<field name="Lada" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="Lada"/>
+		<property name="com.jaspersoft.studio.field.label" value="Lada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="farmacia"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="staticText" uuid="ff273cc3-9e5d-4a29-83f0-e4b478294f18" x="340" y="10" width="199" height="30" fontSize="18.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Registro de farmacias]]></text>
+		</element>
+		<element kind="staticText" uuid="d3c91851-0de7-45fe-a765-eaf7366cb712" x="380" y="40" width="149" height="20" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Reporte de sucursales]]></text>
+		</element>
+		<element kind="rectangle" uuid="ecb374c7-664f-4ec1-9d5c-008fade23dab" mode="Opaque" x="0" y="70" width="550" height="1" backcolor="#030000"/>
+		<element kind="staticText" uuid="c6b1b95f-d709-422f-9ef3-fe5d3588e6c0" x="0" y="10" width="190" height="40" fontSize="24.0" bold="true" italic="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Farmacias R-X]]></text>
+		</element>
+	</title>
+	<pageHeader height="7" splitType="Stretch"/>
+	<columnHeader height="38" splitType="Stretch">
+		<element kind="staticText" uuid="5a268f5b-0011-472c-88d2-16b3f655f5ff" x="0" y="0" width="95" height="30" bold="true" hTextAlign="Justified" vTextAlign="Middle">
+			<text><![CDATA[Nombre]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fa7cfe36-c127-41ab-8cf8-7280006e5005"/>
+		</element>
+		<element kind="staticText" uuid="f408c0e3-cb8d-4b10-84ff-0ff273d18000" x="95" y="0" width="92" height="30" bold="true" hTextAlign="Justified" vTextAlign="Middle">
+			<text><![CDATA[Ciudad]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fcf3e184-83ed-4504-beca-fa79dcdf191d"/>
+		</element>
+		<element kind="staticText" uuid="93168c6d-b50b-41bd-a652-b75e969c9430" x="187" y="0" width="92" height="30" bold="true" hTextAlign="Justified" vTextAlign="Middle">
+			<text><![CDATA[Calle]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b04d070-a288-4121-8823-765fcba8f66d"/>
+		</element>
+		<element kind="staticText" uuid="214f3967-c900-4f19-9005-a105e673aa68" x="279" y="0" width="92" height="30" bold="true" hTextAlign="Justified" vTextAlign="Middle">
+			<text><![CDATA[Código postal]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ba822672-d246-4900-b4f7-90df8010fb6d"/>
+		</element>
+		<element kind="staticText" uuid="07fab910-816e-4073-af74-d8b6557bfb52" x="371" y="0" width="92" height="30" bold="true" hTextAlign="Justified" vTextAlign="Middle">
+			<text><![CDATA[Telefono]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8a5e2dd9-4e6e-4dcb-9daf-8cf3ee1dbbf5"/>
+		</element>
+		<element kind="staticText" uuid="c9a58109-c5e1-4b4d-9451-df478d255252" x="463" y="0" width="92" height="30" bold="true" hTextAlign="Justified" vTextAlign="Middle">
+			<text><![CDATA[Lada]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1db3b401-1265-423a-8972-a035abdf56cf"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<element kind="textField" uuid="9f8a6f95-31e5-4bc2-a358-00cafb0fdab9" x="0" y="0" width="95" height="30">
+				<expression><![CDATA[$F{Nombre}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fa7cfe36-c127-41ab-8cf8-7280006e5005"/>
+			</element>
+			<element kind="textField" uuid="8c6e160a-211d-43d1-a2e2-d464d4a8e953" x="95" y="0" width="92" height="30">
+				<expression><![CDATA[$F{Ciudad}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fcf3e184-83ed-4504-beca-fa79dcdf191d"/>
+			</element>
+			<element kind="textField" uuid="77aaf128-e474-47aa-8f1f-abae8465a523" x="187" y="0" width="92" height="30">
+				<expression><![CDATA[$F{Calle}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7b04d070-a288-4121-8823-765fcba8f66d"/>
+			</element>
+			<element kind="textField" uuid="553637df-f82d-426f-87e0-d8e9bedbfdbe" x="279" y="0" width="92" height="30">
+				<expression><![CDATA[$F{Codigo_Postal}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ba822672-d246-4900-b4f7-90df8010fb6d"/>
+			</element>
+			<element kind="textField" uuid="2f81bdef-2ef7-45d7-8b0f-a9c51e52d6c8" x="371" y="0" width="92" height="30">
+				<expression><![CDATA[$F{Telefono}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8a5e2dd9-4e6e-4dcb-9daf-8cf3ee1dbbf5"/>
+			</element>
+			<element kind="textField" uuid="a6461a55-b09a-4c60-9598-855034b7a18d" x="463" y="0" width="92" height="30">
+				<expression><![CDATA[$F{Lada}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1db3b401-1265-423a-8972-a035abdf56cf"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="7" splitType="Stretch"/>
+	<pageFooter height="3" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch">
+		<element kind="rectangle" uuid="182146d2-08a2-4c78-bbc2-b808c40c503e" mode="Opaque" x="2" y="0" width="550" height="1" backcolor="#030000"/>
+		<element kind="textField" uuid="1110d46c-533e-4ba3-a1ef-e1a25820ac18" x="5" y="3" width="100" height="30" pattern="MMM d, yyyy h:mm:ss a z">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</summary>
+</jasperReport>

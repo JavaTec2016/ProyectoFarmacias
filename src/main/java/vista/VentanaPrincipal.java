@@ -8,6 +8,7 @@ import conexionBD.ConexionBDLite;
 import controlador.DAO;
 import javax.swing.JFrame;
 import modelo.*;
+import reportes.Reportador;
 
 
 /**
@@ -45,9 +46,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
+        btnEstadisticas = new javax.swing.JButton();
+        btnVistas = new javax.swing.JButton();
         panelControl = new javax.swing.JPanel();
         panelPacientes = new javax.swing.JPanel();
         txtPacientes = new javax.swing.JLabel();
@@ -82,8 +83,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         txtRecetas4 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
+        panelMedicamentos = new javax.swing.JPanel();
+        txtRecetas5 = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JSeparator();
+        jLabel14 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuReportes = new javax.swing.JMenu();
+        rptMedico = new javax.swing.JMenuItem();
+        rptPaciente = new javax.swing.JMenuItem();
+        rptFarmacia = new javax.swing.JMenuItem();
+        rptFarmaceuticas = new javax.swing.JMenuItem();
+        rptRecetas = new javax.swing.JMenuItem();
+        rptInventarios = new javax.swing.JMenuItem();
+        rptContratos = new javax.swing.JMenuItem();
+        rptMedicamentos = new javax.swing.JMenuItem();
+        menuVistas = new javax.swing.JMenu();
+        viewSupervisores = new javax.swing.JMenuItem();
+        menuEstadisticas = new javax.swing.JMenu();
+        chartDemanda = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Panel de control");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -254,31 +273,41 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 153, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setBackground(new java.awt.Color(0, 153, 255));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Menú");
-        jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 60));
-
-        jButton3.setBackground(new java.awt.Color(0, 153, 255));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Estadísticas");
-        jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnReportes.setBackground(new java.awt.Color(0, 153, 255));
+        btnReportes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnReportes.setForeground(new java.awt.Color(255, 255, 255));
+        btnReportes.setText("Menú");
+        btnReportes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnReportesActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 148, 60));
+        jPanel2.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 60));
 
-        jButton4.setBackground(new java.awt.Color(0, 153, 255));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Vistas");
-        jButton4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 148, 60));
+        btnEstadisticas.setBackground(new java.awt.Color(0, 153, 255));
+        btnEstadisticas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnEstadisticas.setForeground(new java.awt.Color(255, 255, 255));
+        btnEstadisticas.setText("Estadísticas");
+        btnEstadisticas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEstadisticasActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnEstadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 148, 60));
+
+        btnVistas.setBackground(new java.awt.Color(0, 153, 255));
+        btnVistas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnVistas.setForeground(new java.awt.Color(255, 255, 255));
+        btnVistas.setText("Vistas");
+        btnVistas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnVistas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVistasActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnVistas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 148, 60));
 
         panelRoot.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 1010, 60));
 
@@ -627,6 +656,48 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        panelMedicamentos.setBackground(new java.awt.Color(82, 82, 82));
+        panelMedicamentos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 255), 3, true));
+        panelMedicamentos.setForeground(new java.awt.Color(255, 255, 255));
+        panelMedicamentos.setPreferredSize(new java.awt.Dimension(193, 176));
+        panelMedicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                panelMedicamentosMouseReleased(evt);
+            }
+        });
+
+        txtRecetas5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtRecetas5.setForeground(new java.awt.Color(255, 255, 255));
+        txtRecetas5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtRecetas5.setText("Medicamentos");
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/contrato.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelMedicamentosLayout = new javax.swing.GroupLayout(panelMedicamentos);
+        panelMedicamentos.setLayout(panelMedicamentosLayout);
+        panelMedicamentosLayout.setHorizontalGroup(
+            panelMedicamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMedicamentosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelMedicamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtRecetas5, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                    .addComponent(jSeparator8)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelMedicamentosLayout.setVerticalGroup(
+            panelMedicamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMedicamentosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtRecetas5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout panelControlLayout = new javax.swing.GroupLayout(panelControl);
         panelControl.setLayout(panelControlLayout);
         panelControlLayout.setHorizontalGroup(
@@ -642,14 +713,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(panelMedicos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelControlLayout.createSequentialGroup()
-                        .addComponent(panelFarmacias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addComponent(panelFarmaceuticas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74))
-                    .addGroup(panelControlLayout.createSequentialGroup()
-                        .addComponent(panelContratos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(panelFarmacias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelContratos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelFarmaceuticas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(74, 74, 74))
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelControlLayout.setVerticalGroup(
@@ -666,7 +736,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelRecetas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelInventarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelContratos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelContratos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(116, Short.MAX_VALUE))
         );
 
@@ -674,12 +745,143 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         getContentPane().add(panelRoot);
 
+        jMenuBar1.setBackground(new java.awt.Color(0, 153, 255));
+        jMenuBar1.setBorder(null);
+        jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuBar1.setOpaque(true);
+
+        menuReportes.setBackground(new java.awt.Color(0, 153, 255));
+        menuReportes.setText("Reportes");
+
+        rptMedico.setBackground(new java.awt.Color(0, 153, 255));
+        rptMedico.setForeground(new java.awt.Color(255, 255, 255));
+        rptMedico.setText("Medicos");
+        rptMedico.setOpaque(true);
+        rptMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rptMedicoActionPerformed(evt);
+            }
+        });
+        menuReportes.add(rptMedico);
+
+        rptPaciente.setBackground(new java.awt.Color(0, 153, 255));
+        rptPaciente.setForeground(new java.awt.Color(255, 255, 255));
+        rptPaciente.setText("Pacientes");
+        rptPaciente.setOpaque(true);
+        rptPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rptPacienteActionPerformed(evt);
+            }
+        });
+        menuReportes.add(rptPaciente);
+
+        rptFarmacia.setBackground(new java.awt.Color(0, 153, 255));
+        rptFarmacia.setForeground(new java.awt.Color(255, 255, 255));
+        rptFarmacia.setText("Farmacias");
+        rptFarmacia.setOpaque(true);
+        rptFarmacia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rptFarmaciaActionPerformed(evt);
+            }
+        });
+        menuReportes.add(rptFarmacia);
+
+        rptFarmaceuticas.setBackground(new java.awt.Color(0, 153, 255));
+        rptFarmaceuticas.setForeground(new java.awt.Color(255, 255, 255));
+        rptFarmaceuticas.setText("Farmaceuticas");
+        rptFarmaceuticas.setOpaque(true);
+        rptFarmaceuticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rptFarmaceuticasActionPerformed(evt);
+            }
+        });
+        menuReportes.add(rptFarmaceuticas);
+
+        rptRecetas.setBackground(new java.awt.Color(0, 153, 255));
+        rptRecetas.setForeground(new java.awt.Color(255, 255, 255));
+        rptRecetas.setText("Recetas");
+        rptRecetas.setOpaque(true);
+        rptRecetas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rptRecetasActionPerformed(evt);
+            }
+        });
+        menuReportes.add(rptRecetas);
+
+        rptInventarios.setBackground(new java.awt.Color(0, 153, 255));
+        rptInventarios.setForeground(new java.awt.Color(255, 255, 255));
+        rptInventarios.setText("Inventarios");
+        rptInventarios.setOpaque(true);
+        rptInventarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rptInventariosActionPerformed(evt);
+            }
+        });
+        menuReportes.add(rptInventarios);
+
+        rptContratos.setBackground(new java.awt.Color(0, 153, 255));
+        rptContratos.setForeground(new java.awt.Color(255, 255, 255));
+        rptContratos.setText("Contratos");
+        rptContratos.setOpaque(true);
+        rptContratos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rptContratosActionPerformed(evt);
+            }
+        });
+        menuReportes.add(rptContratos);
+
+        rptMedicamentos.setBackground(new java.awt.Color(0, 153, 255));
+        rptMedicamentos.setForeground(new java.awt.Color(255, 255, 255));
+        rptMedicamentos.setText("Medicamentos");
+        rptMedicamentos.setOpaque(true);
+        rptMedicamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rptMedicamentosActionPerformed(evt);
+            }
+        });
+        menuReportes.add(rptMedicamentos);
+
+        jMenuBar1.add(menuReportes);
+
+        menuVistas.setBackground(new java.awt.Color(0, 153, 255));
+        menuVistas.setText("Vistas");
+
+        viewSupervisores.setBackground(new java.awt.Color(0, 153, 255));
+        viewSupervisores.setForeground(new java.awt.Color(255, 255, 255));
+        viewSupervisores.setText("Medicamentos por contrato");
+        viewSupervisores.setOpaque(true);
+        viewSupervisores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewSupervisoresActionPerformed(evt);
+            }
+        });
+        menuVistas.add(viewSupervisores);
+
+        jMenuBar1.add(menuVistas);
+
+        menuEstadisticas.setText("Estadísticas");
+
+        chartDemanda.setBackground(new java.awt.Color(0, 153, 255));
+        chartDemanda.setForeground(new java.awt.Color(255, 255, 255));
+        chartDemanda.setText("Demanda de medicamentos");
+        chartDemanda.setOpaque(true);
+        chartDemanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chartDemandaActionPerformed(evt);
+            }
+        });
+        menuEstadisticas.add(chartDemanda);
+
+        jMenuBar1.add(menuEstadisticas);
+
+        setJMenuBar(jMenuBar1);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadisticasActionPerformed
+        menuEstadisticas.doClick();
+    }//GEN-LAST:event_btnEstadisticasActionPerformed
 
     private void btnPrincipalMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrincipalMouseReleased
         System.out.println("devolver al panel principal");
@@ -802,6 +1004,63 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         new VentanaLogin().setVisible(true);
     }//GEN-LAST:event_btnLogoutMouseReleased
 
+    private void panelMedicamentosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMedicamentosMouseReleased
+        configurarPanelBotones("Control de medicamentos", null, null, null, null, "Medicamento");
+        panelBotones.configurarTabla();
+        panelBotones.setDisplay("datos del medicamento");
+        mostrarControl(false);
+        mostrarPanel(true);
+    }//GEN-LAST:event_panelMedicamentosMouseReleased
+
+    private void rptFarmaciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptFarmaciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rptFarmaciaActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        // TODO add your handling code here:
+        menuReportes.doClick();
+    }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void btnVistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVistasActionPerformed
+        menuVistas.doClick();
+    }//GEN-LAST:event_btnVistasActionPerformed
+
+    private void rptMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptMedicoActionPerformed
+        Reportador.verReporte("Medico");
+    }//GEN-LAST:event_rptMedicoActionPerformed
+
+    private void rptPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptPacienteActionPerformed
+        Reportador.verReporte("Paciente");
+    }//GEN-LAST:event_rptPacienteActionPerformed
+
+    private void rptFarmaceuticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptFarmaceuticasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rptFarmaceuticasActionPerformed
+
+    private void rptRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptRecetasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rptRecetasActionPerformed
+
+    private void rptInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptInventariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rptInventariosActionPerformed
+
+    private void rptContratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptContratosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rptContratosActionPerformed
+
+    private void rptMedicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rptMedicamentosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rptMedicamentosActionPerformed
+
+    private void viewSupervisoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSupervisoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewSupervisoresActionPerformed
+
+    private void chartDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chartDemandaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chartDemandaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -839,17 +1098,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private Usuario user;
     private PanelBotones panelBotones;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEstadisticas;
     private javax.swing.JPanel btnLogout;
     private javax.swing.JPanel btnPrincipal;
+    private javax.swing.JButton btnReportes;
     private javax.swing.JPanel btnUsuarios;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnVistas;
+    private javax.swing.JMenuItem chartDemanda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -857,6 +1118,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
@@ -870,15 +1132,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JMenu menuEstadisticas;
+    private javax.swing.JMenu menuReportes;
+    private javax.swing.JMenu menuVistas;
     private javax.swing.JPanel panelContratos;
     private javax.swing.JPanel panelControl;
     private javax.swing.JPanel panelFarmaceuticas;
     private javax.swing.JPanel panelFarmacias;
     private javax.swing.JPanel panelInventarios;
+    private javax.swing.JPanel panelMedicamentos;
     private javax.swing.JPanel panelMedicos;
     private javax.swing.JPanel panelPacientes;
     private javax.swing.JPanel panelRecetas;
     private javax.swing.JPanel panelRoot;
+    private javax.swing.JMenuItem rptContratos;
+    private javax.swing.JMenuItem rptFarmaceuticas;
+    private javax.swing.JMenuItem rptFarmacia;
+    private javax.swing.JMenuItem rptInventarios;
+    private javax.swing.JMenuItem rptMedicamentos;
+    private javax.swing.JMenuItem rptMedico;
+    private javax.swing.JMenuItem rptPaciente;
+    private javax.swing.JMenuItem rptRecetas;
     private javax.swing.JLabel txtFarmaceuticas2;
     private javax.swing.JLabel txtFarmacias;
     private javax.swing.JLabel txtMedicos;
@@ -888,5 +1163,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel txtRecetas2;
     private javax.swing.JLabel txtRecetas3;
     private javax.swing.JLabel txtRecetas4;
+    private javax.swing.JLabel txtRecetas5;
+    private javax.swing.JMenuItem viewSupervisores;
     // End of variables declaration//GEN-END:variables
 }
