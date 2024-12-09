@@ -7,10 +7,16 @@ package vista;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
+import controlador.DAO;
 import modelo.ModeloBD;
+import modelo.Registrable;
+import modelo.Supervisor_Medicamento;
 import vista.altas.AccionConfigurable;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  *
@@ -163,6 +169,19 @@ public class PanelBotones extends javax.swing.JPanel {
     }
     public void configurarTabla(){
         Componedor.columnasTabla(tablaDatos, tabla);
+        if(tabla.equals("Supervisor_Medicamento")){
+            ocultarBotones();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    ArrayList<Registrable> r = DAO.d.consultarPreparedUniversal(tabla, new String[]{"*"}, new String[]{}, new String[]{}, new Object[][]{}, false);
+                    Componedor.limpiarTabla(tablaDatos);
+                    for(Registrable rg : r){
+                        Componedor.filaTabla(tablaDatos, rg);
+                    }
+                }
+            }).start();
+        }
     }
     public void encabezado(String texto){
         tabla = texto;
@@ -191,6 +210,7 @@ public class PanelBotones extends javax.swing.JPanel {
             ventanaConsultar.configurarTabla();
             System.out.println(tabla);
             //en teoria cada tabla podria hacerlo solita
+            System.out.println("USUARION" + Arrays.toString(ModeloBD.compsDe(tabla)));
             ventanaConsultar.datosGeneracion(
                     ModeloBD.labelsDe(tabla),
                     ModeloBD.compsDe(tabla),

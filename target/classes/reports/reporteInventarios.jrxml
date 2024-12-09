@@ -4,23 +4,23 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="WHERE" class="java.lang.String"/>
 	<query language="sql"><![CDATA[SELECT *
-FROM farmacia_inventario WHERE Nombre_Farmacia LIKE  '$P!{WHERE}%']]></query>
-	<field name="Nombre_Farmacia" class="java.lang.Object">
+FROM farmacia_inventario]]></query>
+	<field name="Nombre_Farmacia" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="Nombre_Farmacia"/>
 		<property name="com.jaspersoft.studio.field.label" value="Nombre_Farmacia"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="Farmacia_Inventario"/>
 	</field>
-	<field name="Medicamento_Precio" class="java.lang.Object">
+	<field name="Medicamento_Precio" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="Medicamento_Precio"/>
 		<property name="com.jaspersoft.studio.field.label" value="Medicamento_Precio"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="Farmacia_Inventario"/>
 	</field>
-	<field name="Nombre_Farmaceutica" class="java.lang.Object">
+	<field name="Nombre_Farmaceutica" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="Nombre_Farmaceutica"/>
 		<property name="com.jaspersoft.studio.field.label" value="Nombre_Farmaceutica"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="Farmacia_Inventario"/>
 	</field>
-	<field name="Nombre_Comercial" class="java.lang.Object">
+	<field name="Nombre_Comercial" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="Nombre_Comercial"/>
 		<property name="com.jaspersoft.studio.field.label" value="Nombre_Comercial"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="Farmacia_Inventario"/>
@@ -31,7 +31,7 @@ FROM farmacia_inventario WHERE Nombre_Farmacia LIKE  '$P!{WHERE}%']]></query>
 			<text><![CDATA[Reporte de inventarios]]></text>
 		</element>
 		<element kind="rectangle" uuid="ce4b7c3c-05d0-4545-b28f-f9ec5b924c20" mode="Opaque" x="0" y="70" width="550" height="1" backcolor="#030000"/>
-		<element kind="staticText" uuid="fefdf93e-e9b5-481d-a04c-7ef45437ba8e" x="0" y="10" width="190" height="40" fontSize="24.0" bold="true" italic="true" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="fefdf93e-e9b5-481d-a04c-7ef45437ba8e" x="0" y="10" width="190" height="40" fontSize="24.0" italic="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[Farmacias R-X]]></text>
 		</element>
 		<element kind="textField" uuid="9af85695-40d6-4596-914c-ef5aa894008e" x="417" y="40" width="118" height="30" fontSize="8.0">

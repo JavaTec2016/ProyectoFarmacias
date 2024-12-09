@@ -23,7 +23,7 @@ public class Usuario extends ModeloBD{
         return new boolean[]{true, true, true,true, true, true, true};
     }
     public static String[] obtenerTipoDato(){
-        return new String[]{"VARCHAR", "VARCHAR", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN"};
+        return new String[]{"VARCHAR", "VARCHAR", "INT", "INT", "INT", "INT", "INT"};
     }
     public static boolean[] obtenerNoNulos() {
         return new boolean[]{true, true, true,true, true, true, true};
@@ -33,10 +33,10 @@ public class Usuario extends ModeloBD{
     }
     //validacion de datos especial
     public static String[] obtenerLabels(){
-        return new String[]{"Nombre de usuario","Contraseña","Confirmar contraseña","Puede consultar datos","Puede consultar insertar datos", "Puede eliminar datos", "Puede modificar datos"};
+        return new String[]{"Nombre de usuario","Contraseña","Puede consultar datos","Puede consultar insertar datos", "Puede eliminar datos", "Puede modificar datos", "Administrador"};
     }
     public static String[] obtenerComponentes(){
-        return new String[]{"JTextField", "JPasswordField", "JPasswordField", "JCheckBox", "JCheckBox", "JCheckBox", "JCheckBox", "JCheckBox"};
+        return new String[]{"JTextField", "JTextField", "JCheckBox", "JCheckBox", "JCheckBox", "JCheckBox", "JCheckBox"};
     }
     public static int[] obtenerPrimarias(){
         return new int[]{0};

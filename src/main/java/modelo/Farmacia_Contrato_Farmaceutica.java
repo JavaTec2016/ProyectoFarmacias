@@ -21,6 +21,7 @@ public class Farmacia_Contrato_Farmaceutica extends ModeloBD{
     @Override
     public String toString() {
         return "Farmacia_Contrato_Farmaceutica{" +
+                "Id_Contrato='" + Id_Contrato + '\'' +
                 "Nombre_Farmacia='" + Nombre_Farmacia + '\'' +
                 ", Nombre_Farmaceutica='" + Nombre_Farmaceutica + '\'' +
                 ", Fecha_Inicio='" + Fecha_Inicio + '\'' +
@@ -33,19 +34,19 @@ public class Farmacia_Contrato_Farmaceutica extends ModeloBD{
         return new boolean[]{true, true, true, true, true, true, true};
     }
     public static String[] obtenerTipoDato(){
-        return new String[]{"VARCHAR", "VARCHAR", "DATE", "DATE", "MEDIUMTEXT", "CHAR"};
+        return new String[]{"VARCHAR", "VARCHAR", "VARCHAR", "DATE", "DATE", "MEDIUMTEXT", "CHAR"};
     }
     public static boolean[] obtenerNoNulos() {
         return new boolean[]{true, true, true, true, true, true, true};
     }
     public static int[] obtenerLongitudes() {
-        return new int[]{50, 50, -1, -1, -1, 16};
+        return new int[]{50, 50, 50, -1, -1, -1, 16};
     }
     public static String[] obtenerLabels(){
-        return new String[]{"Nombre de la farmacia","Nombre de la farmaceutica","Fecha de inicio","Fecha de término", "Contenido"};
+        return new String[]{"ID","Nombre de la farmacia","Nombre de la farmaceutica","Fecha de inicio","Fecha de término", "Contenido", "SSN Supervisor"};
     }
     public static String[] obtenerComponentes(){
-        return new String[]{"JTextField", "JTextField", "JDateField", "JDateField", "JTextField"};
+        return new String[]{"JTextField", "JTextField", "JTextField", "JDateField", "JDateField", "JTextField", "JTextField"};
     }
     public static int[] obtenerPrimarias(){
         return new int[]{0};

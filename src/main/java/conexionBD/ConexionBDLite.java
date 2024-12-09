@@ -2,11 +2,13 @@ package conexionBD;
 import controlador.DAO;
 import modelo.Registrable;
 import modelo.Usuario;
+import org.sqlite.SQLiteConfig;
 
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Properties;
 
 
 public class ConexionBDLite {
@@ -28,6 +30,7 @@ public class ConexionBDLite {
             prepararStatement("SELECT nombre, pass FROM usuario WHERE nombre=?", new String[]{"VARCHAR"}, new Object[]{usuario});
             ResultSet rs = ejecutarConsulta();
             if(rs.getObject(1) == null){
+                conexion.close();
                 conexion = null;
                 System.out.println("error 1");
                 return 1;
@@ -35,6 +38,7 @@ public class ConexionBDLite {
             prepararStatement("SELECT nombre, pass FROM usuario WHERE nombre=? AND pass=?", new String[]{"VARCHAR", "VARCHAR"}, new Object[]{usuario, pass});
             rs = ejecutarConsulta();
             if(rs.getObject(1) == null){
+                conexion.close();
                 conexion = null;
                 System.out.println("error 2");
                 return 2;
@@ -59,7 +63,10 @@ public class ConexionBDLite {
             Class.forName("org.sqlite.JDBC");
             //si la url está incorrecta, va a generar una BD en donde diga y con el nombre que diga, aguas
             String url = "jdbc:sqlite:C:/Users/TheGr/Documents/NetBeansProjects/ProyectoGUI/BD/FarmaciasRX.db";
-            conexion = DriverManager.getConnection(url, usuario, pass);
+
+            SQLiteConfig config = new SQLiteConfig();
+            config.enforceForeignKeys(true);
+            conexion = DriverManager.getConnection(url, config.toProperties());
             System.out.println("Atte el licenciado GG");
 
             //arraylist de uno solito para definir el usuario de la conexion
@@ -77,7 +84,14 @@ public class ConexionBDLite {
         }
     }
     public void cerrarConexion(){
-        conexion = null;
+        try {
+            conexion.close();
+            conexion = null;
+        } catch (SQLException e) {
+            System.out.println("Error al cerrar la ocnexion");
+            throw new RuntimeException(e);
+        }
+
     }
     /**
      * Configura el preparedStatement en base a listas de valores y sus tipos de datos
@@ -119,11 +133,11 @@ public class ConexionBDLite {
             String tipo = tipos[i];
             int ix = tipo.lastIndexOf('.');
             tipo = ix == -1 ? tipo : tipo.substring(ix+1);
-            System.out.println("CONNEXX " + i +": " + tipo);
+            //System.out.println("CONNEXX " + i +": " + tipo);
             switch (tipo.toLowerCase()){
                 case "smallint", "short": st.setShort(indice, (short)valores[i]); break;
                 case "int":
-                case "integer": st.setInt(indice, (int)valores[i]); break;
+                case "integer", "boolean": st.setInt(indice, (int)valores[i]); break;
                 case "varchar":
                 case "char":
                 case "mediumtext":
@@ -135,13 +149,14 @@ public class ConexionBDLite {
                 case "double": st.setDouble(indice, (double)valores[i]); break;
                 case "decimal": st.setBigDecimal(indice, (BigDecimal)valores[i]); break;
                 case "date":
-                    System.out.println(Date.valueOf((String) valores[i]));
+                    //System.out.println(Date.valueOf((String) valores[i]));
                     st.setString(indice, (String) valores[i]);
                     break;
                 //case "boolean": st.setBoolean();
+                default:
+                    System.out.println("tipo no reconocido: " + tipo);
             }
         }
-        //System.out.println("CONEXX: " + st);
     }
     ///////MANEJO DE TRANSACCIONES
     public  void establecerAutocommit(boolean b){

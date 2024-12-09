@@ -5,10 +5,10 @@ public class Farmacia extends ModeloBD{
     String Ciudad;
     String Calle;
     String Codigo_Postal;
-    String Telefono;
-    String Lada;
+    Integer Telefono;
+    Integer Lada;
 
-    public Farmacia(String nombre, String ciudad, String calle, String codigo_Postal, String telefono, String lada) {
+    public Farmacia(String nombre, String ciudad, String calle, String codigo_Postal, Integer telefono, Integer lada) {
         Nombre = nombre;
         Ciudad = ciudad;
         Calle = calle;
@@ -33,7 +33,7 @@ public class Farmacia extends ModeloBD{
         return new boolean[]{true, true, true, true, true, true};
     }
     public static String[] obtenerTipoDato(){
-        return new String[]{"VARCHAR", "VARCHAR", "VARCHAR", "VARCHAR", "VARCHAR", "VARCHAR"};
+        return new String[]{"VARCHAR", "VARCHAR", "VARCHAR", "VARCHAR", "INT", "INT"};
     }
     public static boolean[] obtenerNoNulos() {
         return new boolean[]{true, true, true, true, true, true};

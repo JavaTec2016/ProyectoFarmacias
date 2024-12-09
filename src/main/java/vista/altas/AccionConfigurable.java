@@ -8,6 +8,8 @@ import controlador.DAO;
 import modelo.ModeloBD;
 import modelo.Registrable;
 import vista.Componedor;
+import vista.Extractor;
+import vista.Inspector;
 
 import javax.swing.*;
 import java.awt.*;
@@ -223,12 +225,16 @@ public class AccionConfigurable extends javax.swing.JFrame {
             if(campo.equalsIgnoreCase("jnumberfield")){
                 comps[0].setBounds(p.x + panelFormulario.getWidth() / 3 + 80, p.y+30+i*30, panelFormulario.getWidth()/3+30, 30);
             }
+            if(campo.equalsIgnoreCase("jcheckbox")){
+                comps[0].setBounds(p.x + panelFormulario.getWidth() / 3 + 80, p.y+30+i*30, 30, 30);
+            }
             for(JComponent c : comps){
                 inputs.add(c);
                 panelFormulario.add(c);
             }
 
             checksBusqueda[i] = new JCheckBox("");
+            checksBusqueda[i].setVisible(false);
             checksBusqueda[i].setBounds((p.x + panelFormulario.getWidth() / 3+30)*2+60, p.y+30+i*30, 20, 30);
 
             JLabel label = new JLabel();
@@ -305,13 +311,21 @@ public class AccionConfigurable extends javax.swing.JFrame {
                     byte estado = validarFormulario(datos, obligatorios, longitudes, tipos);
                     if(estado!=0)return;
 
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Registrable r = ModeloBD.instanciar(datos, tabla);
+                            int codigo = DAO.d.agregarPreparedUniversal(r);
+                            if(codigo != 0){
+                                panelError(codigo);
+                                return;
+                            }
+                            JOptionPane.showMessageDialog(getContentPane(), "Registro exitoso", "Aviso de inserción", JOptionPane.INFORMATION_MESSAGE);
+                            limbo = true;
+                        }
+                    }).start();
 
-                    Registrable r = ModeloBD.instanciar(datos, tabla);
 
-                    DAO.d.agregarPreparedUniversal(r);
-
-                    JOptionPane.showMessageDialog(getContentPane(), "Registro exitoso", "Aviso de inserción", JOptionPane.INFORMATION_MESSAGE);
-                    limbo = true;
                 }
             };
             break;
@@ -329,7 +343,7 @@ public class AccionConfigurable extends javax.swing.JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Object[] pk = extraerDatos();
-                        Registrable registro = ModeloBD.instanciar(pk, tabla);
+                        //Registrable registro = ModeloBD.instanciar(pk, tabla);
                         String[] primariaNombres = Componedor.obtenerFiltrosNombres(ModeloBD.nombresDe(tabla), indicesPrimarias);
                         String[] primariaTipos = Componedor.obtenerFiltrosNombres(tipos, indicesPrimarias);
                         Object[] primariaValores = Componedor.obtenerFiltrosValores(pk, indicesPrimarias);
@@ -342,10 +356,29 @@ public class AccionConfigurable extends javax.swing.JFrame {
                                 return;
                             }
                         }
+                        if(tabla.equalsIgnoreCase("farmaceutica")){
+                            int opcion = JOptionPane.showOptionDialog(getContentPane(),
+                                    "ADVERTENCIA: eliminar este registro provocará que cualquier registro relacionado sea eliminado", "Alerta de eliminacion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE,
+                                    null, new String[]{"Cancelar","Continuar"}, null);
+                            if(opcion==0){
+                                System.out.println("cancelao");
+                                return;
+                            }
+                        }
                         //es obligatorio dar las llaves primarias (se necesitara un boton de llaves primarias aqui)
-                        DAO.d.EliminarPreparedUniversal(tabla, primariaNombres, primariaTipos, primariaValores);
-                        JOptionPane.showMessageDialog(getContentPane(), "Eliminacion completada");
-                        limbo = true;
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                int i = DAO.d.EliminarPreparedUniversal(tabla, primariaNombres, primariaTipos, primariaValores);
+                                if(i != 0){
+                                    panelError(i);
+                                    return;
+                                }
+                                JOptionPane.showMessageDialog(getContentPane(), "Eliminacion completada");
+                                limbo = true;
+                            }
+                        }).start();
+
                     }
                 };
                 break;
@@ -368,11 +401,20 @@ public class AccionConfigurable extends javax.swing.JFrame {
                         Object[] primariaValores = Componedor.obtenerFiltrosValores(pk, indicesPrimarias);
 
                         //es obligatorio dar las llaves primarias (se necesitara un boton de llaves primarias aqui)
-                        DAO.d.actualizarPreparedUniversal(registro, primariaNombres, primariaTipos, primariaValores);
-                        JOptionPane.showMessageDialog(getContentPane(), "Cambios efectuados");
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                int i = DAO.d.actualizarPreparedUniversal(registro, primariaNombres, primariaTipos, primariaValores);
+                                if(i != 0){
+                                    panelError(i);
+                                    return;
+                                }
+                                JOptionPane.showMessageDialog(getContentPane(), "Cambios efectuados");
 
-                        System.out.println("modificadera: " + Arrays.toString(pk));
-                        limbo = true;
+                                System.out.println("modificadera: " + Arrays.toString(pk));
+                                limbo = true;
+                            }
+                        }).start();
                     }
                 };
                 break;
@@ -390,10 +432,16 @@ public class AccionConfigurable extends javax.swing.JFrame {
                         if(validarFormulario(pk, obligatorios, longitudes, tipos, checksBusqueda)!=0) return;
 
                         int[] indicesValidos = Componedor.ubicarCamposValidos(pk);
-                        ArrayList<Registrable> rs = formatearConsulta(indicesValidos, pk);
-                        System.out.println("uy uy uy " + rs.size());
-                        Componedor.limpiarTabla(tablaAgregar);
-                        rs.forEach(reg ->{Componedor.filaTabla(tablaAgregar, reg);});
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ArrayList<Registrable> rs = formatearConsulta(indicesValidos, pk);
+                                System.out.println("uy uy uy " + rs.size());
+                                Componedor.limpiarTabla(tablaAgregar);
+                                rs.forEach(reg ->{Componedor.filaTabla(tablaAgregar, reg);});
+                            }
+                        }).start();
+
 
                     }
                 };
@@ -404,7 +452,7 @@ public class AccionConfigurable extends javax.swing.JFrame {
 
     public void tablaClick(){
         int rowa = tablaAgregar.getSelectedRow();
-        Object[] selector = Componedor.extraerFila(tablaAgregar, rowa);
+        Object[] selector = Extractor.extraerFila(tablaAgregar, rowa);
         //System.out.println(Arrays.toString(selector));
         Componedor.autoRellenar(inputs, campos, selector);
     }
@@ -456,6 +504,7 @@ public class AccionConfigurable extends javax.swing.JFrame {
     }
     public void prepararCheckBusqueda(){
         for(int i = 0; i < checksBusqueda.length; i++){
+            checksBusqueda[i].setVisible(true);
             panelFormulario.add(checksBusqueda[i]);
         }
     }
@@ -496,7 +545,7 @@ public class AccionConfigurable extends javax.swing.JFrame {
             String tipo = tipos[i];
 
             //System.out.println(dato + " , " + tipo + ", " + longitud);
-            System.out.println( "VALIDA : "+labels[i] + ", " + dato +", " + checksBusqueda[i].isSelected());
+            //System.out.println( "VALIDA : "+labels[i] + ", " + dato +", " + checksBusqueda[i].isSelected());
             if(dato==null){
                 if((nonulo || esPrimario(i)) && checks[i].isSelected()){
                     //contrastar no nulos con el modelo y verificar
@@ -536,31 +585,34 @@ public class AccionConfigurable extends javax.swing.JFrame {
         for(JComponent in : inputs){
             inps[i] = in;
             try{
-                Componedor.extraerDatos(campos, tipos, inputs, i);
+
+                Extractor.extraerDatos(campos, tipos, inputs, i);
+                i++;
             }catch (NumberFormatException e){
-                System.out.println(i+", " + inputs.size());
+                i--;
+                System.out.println(i+", AAAAAAAAA " + inputs.size());
                 Object tope = Componedor.maximo(tipos[i]);
                 JOptionPane.showMessageDialog(getContentPane(), "El campo '"+labels[i]+"' solo admite numeros"+
                         (Integer.parseInt(tope.toString()) > 0 ? " no mayores a " + tope : ""), "Error de datos", JOptionPane.ERROR_MESSAGE);
                 return null;
             }
-            i++;
         }
         i--;
         try{
-            Componedor.extraerDatos(campos, tipos, inps);
+            Extractor.extraerDatos(campos, tipos, inps);
         }catch (NumberFormatException e){
             Object tope = Componedor.maximo(tipos[i]);
             JOptionPane.showMessageDialog(getContentPane(), "El campo '"+labels[i]+"' solo admite numeros"+
                     (Integer.parseInt(tope.toString()) > 0 ? " no mayores a " + tope : ""), "Error de datos", JOptionPane.ERROR_MESSAGE);
             return null;
         }
-        return Componedor.extraerDatos(campos, tipos, inps);
+        return Extractor.extraerDatos(campos, tipos, inps);
     }
     public int[] primaryValidas(){
         ArrayList<Integer> a = new ArrayList<Integer>();
         for(int i : indicesPrimarias){
-            if(!checksBusqueda[i].isEnabled() || (checksBusqueda[i].isEnabled() && checksBusqueda[i].isSelected())){
+
+            if(!checksBusqueda[i].isVisible() || (checksBusqueda[i].isVisible() && checksBusqueda[i].isSelected())){
                 a.add(i);
             }
         }
@@ -579,7 +631,9 @@ public class AccionConfigurable extends javax.swing.JFrame {
         //el dao excluye coindicencias parciales, habra que arreglarlo
         //arreglada 1, dao y conexionBDLite
 
-        //System.out.println(Arrays.toString(indices));
+        System.out.println("CONCAMPOS: " + Arrays.toString(indices) + ", " + Arrays.toString(filtrosValores));
+        //System.out.println(Arrays.to  String(indices));
+        //System.out.println("FORMATEA " + Arrays.toString(filtrosValores));
 
         return DAO.d.consultarPreparedUniversal(tabla, new String[]{"*"}, filtroNombres, filtrosTipos, filtrosValores, true);
     }
@@ -596,11 +650,13 @@ public class AccionConfigurable extends javax.swing.JFrame {
             return;
         }
         int[] indices = primaryValidas();
-
+        int[] comb = Inspector.intersectar(indices, indicesPrimarias);
+        comb = Inspector.intersectar(comb, Componedor.ubicarCamposValidos(datos));
+        //datos = Componedor.filtrarIndices(datos, indices);
         //el dao excluye coindicencias parciales, habra que arreglarlo
         //arreglada 1, dao y conexionBDLite
-        System.out.println("CONCAMPOS: " + Arrays.toString(indices) + ", " + Arrays.toString(datos));
-        ArrayList<Registrable> rs = formatearConsulta(indices, datos); //DAO.d.consultarPreparedUniversal(tabla, new String[]{"*"}, filtroNombres, filtrosTipos, filtrosValores, true);
+
+        ArrayList<Registrable> rs = formatearConsulta(comb, datos); //DAO.d.consultarPreparedUniversal(tabla, new String[]{"*"}, filtroNombres, filtrosTipos, filtrosValores, true);
 
         System.out.println("uy uy uy " + rs.size());
         Componedor.limpiarTabla(tablaAgregar);
@@ -635,10 +691,36 @@ public class AccionConfigurable extends javax.swing.JFrame {
                 @Override
                 public void keyReleased(KeyEvent e) {
                     super.keyReleased(e);
-                    consultaCampos();
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            consultaCampos();
+                        }
+                    }).start();
+
                 }
             });
         }
+    }
+    public void panelError(int codigo){
+        switch (codigo){
+            case 19: JOptionPane.showMessageDialog(getContentPane(), getMensajeFK(tabla), "Error de relacion", JOptionPane.ERROR_MESSAGE);
+            default:
+                JOptionPane.showMessageDialog(getContentPane(), "Los datos no son correctos: " + codigo, "Error de relacion", JOptionPane.ERROR_MESSAGE);
+                System.out.println("Codigo " + codigo);
+        }
+    }
+    public String getMensajeFK(String tabla){
+        switch (tabla){
+            case "Paciente": return "No se encontró al medico de cabecera";
+            case "Medico": return "Test";
+            case "Medicamento": return "No se encontró la farmacéutica";
+            case "Recetas": return "Los datos apuntan a un paciente, medico o medicamento que no existe";
+            case "Farmacia_Contrato_Farmaceutica": return "No se encontró la farmacia, la farmacéutica o el paciente";
+            case "Farmacia_Inventario": return "No se encontro la farmacia o el medicamento";
+        }
+        return "El registro contiene datos de registros inexistentes";
     }
     /**
      * @param args the command line arguments

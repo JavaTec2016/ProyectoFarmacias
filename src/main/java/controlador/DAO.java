@@ -4,9 +4,8 @@ import conexionBD.ConexionBD;
 import conexionBD.ConexionBDLite;
 import modelo.*;
 import vista.Componedor;
+import vista.Extractor;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -41,7 +40,6 @@ public class DAO {
         String[] camposTipos = registrable.tipoDatos();
 
         //preparar la sentencia sql
-        System.out.println(tipo);
         String sql = "INSERT INTO " + tipo + " VALUES(";
 
         //reflexion truco a ver si no se rompe mi programa uyuyuy
@@ -92,7 +90,7 @@ public class DAO {
         String[] camposTipos = registrable.tipoDatos();
         Object[] camposValores = registrable.obtenerValores();
 
-        System.out.println(Arrays.toString(camposTipos));
+        //System.out.println(Arrays.toString(camposTipos));
         String sql = "INSERT INTO " + tipo + " VALUES(";
         int i = 0;
         for(; i < camposTipos.length; i++){ sql += "?,"; }
@@ -119,7 +117,7 @@ public class DAO {
         //sobran 1 espacio, 3 caracteres AND y 1 espacio, 5 caracteres
         int corte = sql.length()-5;
         sql = sql.substring(0, corte);
-        System.out.println(sql);
+        //System.out.println(sql);
 
         return conexion.ejecutarInstruccionDML(sql);
     }
@@ -133,11 +131,11 @@ public class DAO {
         sql = sql.substring(0, corte);
         try {
             conexionLite.prepararStatement(sql, tipos, valores);
-            System.out.println(conexionLite.st);
+            //System.out.println(conexionLite.st);
             conexionLite.ejecutarInstruccion();
             return 0;
         } catch (SQLException e) {
-            System.out.println("Error en la eliminacion: " + e.getMessage());
+            //System.out.println("Error en la eliminacion: " + e.getMessage());
             return e.getErrorCode();
         }
     }
@@ -170,7 +168,7 @@ public class DAO {
             String campo = camposNombres[i];
             String dato = camposTipos[i];
             String sqlRes = obtenerValor(dato, campo, registrable, tipo);
-            System.out.println("ID: " + sqlRes);
+            //System.out.println("ID: " + sqlRes);
             if(sqlRes.equalsIgnoreCase("NULL")) return 1;
             restr += campo+"="+sqlRes+" AND ";
         }
@@ -183,12 +181,12 @@ public class DAO {
             String dato = camposTipos[i];
             String sqlValor = obtenerValor(dato, campo, registrable, tipo);
             //si es nulo se queda sin cambios
-            //System.out.println(sqlValor + " valor");
+
             if(sqlValor.equals("NULL") && nnl[i]) continue;
             sql += campo + "="+sqlValor+", ";
             cambios++;
         }
-        System.out.println("DAO actualizar, cambios: " + cambios);
+
         //si no hay cambios no hay nada que hacer;
         if(cambios == 0) return 1;
         int corte = sql.length()-2;
@@ -196,7 +194,7 @@ public class DAO {
 
         sql+=restr;
         //la instrucción está lista para ejecutarse
-        System.out.println(sql);
+
         return conexion.ejecutarInstruccionDML(sql);
 
     }
@@ -231,8 +229,10 @@ public class DAO {
         sql = sql.substring(0, corte);
         //formateo del WHERE
         int j = 0;
-        for(; j < filtrosTipos.length; i++, j++){
+        //System.out.println(Arrays.toString(filtrosNombres)+", " + Arrays.toString(filtrosTipos));
+        for(; j < filtrosTipos.length; j++){
             restr += filtrosNombres[j]+"=?"+" AND ";
+            System.out.println(restr + " , "+ (i + j));
             instruccionTipos[i+j] = filtrosTipos[j]; //rellena despues los datos del WHERE
             instruccionValores[i+j] = filtrosValores[j];
         }
@@ -241,8 +241,7 @@ public class DAO {
         sql+=restr;
         //la sentencia y valores ya estan listos
         try {
-            //System.out.println(sql);
-            //System.out.println(Arrays.toString(instruccionTipos) +"m, "+ Arrays.toString(instruccionValores));
+
             conexionLite.prepararStatement(sql, instruccionTipos, instruccionValores);
             conexionLite.ejecutarInstruccion();
             return 0;
@@ -300,7 +299,7 @@ public class DAO {
                     //rellenar los argumentos
 
                     args[j] = rs.getObject(j+1);
-                    //System.out.println( rs.getObject(j+1).getClass() );
+
                     //resulta que si le metes un date a un constructor con strings truena
                     if(rs.getObject(j+1).getClass().getName().equals("java.sql.Date")){
 
@@ -360,7 +359,7 @@ public class DAO {
                     //rellenar los argumentos
 
                     args[j] = rs.getObject(j+1);
-                    //System.out.println( rs.getObject(j+1).getClass() );
+
                     //resulta que si le metes un date a un constructor con strings truena
                     if(rs.getObject(j+1).getClass().getName().equals("java.sql.Date")){
 
@@ -441,8 +440,10 @@ public class DAO {
         }
         where = where.substring(0, where.length()-5);
         try {
+            if(where.length() <=2) where="";
+            //System.out.println(Arrays.toString(filtroValores) +", "+ Arrays.toString(filtroNombres));
             conexionLite.prepararStatement(select+where, filtroTipos, filtroValores, parcial);
-            //System.out.println(Arrays.toString(filtroValores));
+            System.out.println(conexionLite.st);
             ResultSet rs = conexionLite.ejecutarConsulta();
             //saber que clase es
             Class<?> modelo = Class.forName("modelo."+tabla);
@@ -460,7 +461,7 @@ public class DAO {
             }
             //iniciar un objeto con espacios segun la cantidad de parametros
             args = new Object[cons.getParameterCount()];
-            //System.out.println(Arrays.toString(argTypes) + " , " + Arrays.toString(colu));
+
             while(rs.next()) {
 
                 for(int j = 0; j < args.length; j++){
@@ -476,9 +477,98 @@ public class DAO {
                     }else{
                         //rellenar los argumentos
                         //asegurar que el dato sea del tipo que el constructor requiere
-                        args[j] = Componedor.extraerTexto(rs.getObject(j+1).toString(), argTypes[j]);
-                        System.out.println(args[j].getClass().getName() + ", " + argTypes[j] + " ," + args[j]);
+                        args[j] = Extractor.extraerTexto(rs.getObject(j+1).toString(), argTypes[j]);
+                        //resulta que si le metes un date a un constructor con strings truena
+                        if(rs.getObject(j+1).getClass().getName().equals("java.sql.Date")){
 
+                            args[j] = rs.getObject(j+1).toString();
+                        }
+                    }
+
+                }
+
+                //inicializar el objeto como registrable
+                Registrable o = (Registrable) cons.newInstance(args);
+                //y agregarlo al output
+                registros.add(o);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error en consulta SQL: " + e.getErrorCode() + "\n" + e.getMessage());
+            throw new RuntimeException(e);
+            //return null;
+        } catch (ClassNotFoundException e) {
+            System.out.println("modelo."+tabla+" no existe");
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            System.out.println("Error al invocar el constructor de modelo."+tabla);
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            System.out.println("modelo."+tabla+" no puede ser instanciado");
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            System.out.println("modelo."+tabla+" no puede ser accesado");
+            throw new RuntimeException(e);
+        }
+        return registros;
+    }
+    public ArrayList<Registrable> consultarPreparedUniversalCOUNT(String tabla, String entidad,
+                                                                  String[] selecNombres,
+                                                                  String[] filtroNombres, String[] filtroTipos, Object[] filtroValores, boolean parcial, String grupoNombre){
+        ArrayList<Registrable> registros = new ArrayList<Registrable>();
+        Object[] args;
+        String select = "SELECT ";
+        String where = " WHERE ";
+
+        for(String nombre: selecNombres){ select += nombre+", "; }
+        select = select.substring(0, select.length()-2) + " FROM " + tabla;
+        int i = 0;
+        for(String campo : filtroNombres){
+
+            if(parcial && esTexto(filtroTipos[i]))where += campo+" LIKE ? AND ";
+            else where += campo+"=? AND ";
+            i++;
+        }
+        where = where.substring(0, where.length()-5);
+        try {
+            if(where.length() <=2) where="";
+            where += " GROUP BY "+ grupoNombre;
+            conexionLite.prepararStatement(select+where, filtroTipos, filtroValores, parcial);
+            System.out.println(conexionLite.st);
+            ResultSet rs = conexionLite.ejecutarConsulta();
+
+            Class<?> modelo = Class.forName("modelo."+entidad);
+            //saber que constructor tiene la clase
+            Constructor<?> cons = modelo.getConstructors()[0];
+            String[] argNames = new String[modelo.getDeclaredFields().length];
+            String[] argTypes = new String[modelo.getDeclaredFields().length]; ///las longitudes siempre deberian coincidir
+            Class[] paramTypes = cons.getParameterTypes();
+
+            int i2 = 0;
+            for(Field f : modelo.getDeclaredFields()){
+                argNames[i2] = f.getName();
+                argTypes[i2] = paramTypes[i2].getName();
+                i2++;
+            }
+            //iniciar un objeto con espacios segun la cantidad de parametros
+            args = new Object[cons.getParameterCount()];
+
+            while(rs.next()) {
+
+                for(int j = 0; j < args.length; j++){
+                    String columna = rs.getMetaData().getColumnName(j+1);
+
+
+                    ///LOS ARGUMENTOS Y LAS COLUMNAS NO COINCIDEN
+                    //revisar el tipo de dato del argumento y rellenarlo con un valor nulo
+
+                    if(!columna.equalsIgnoreCase(argNames[j])){
+                        System.out.println("DAO consulta: CAMPOS IRREGULARES: (" + columna + " != "+argNames[j] +  ") " + j + " TIPO:  "+ argTypes[j]);
+                        args[j] = rellenarArgumento(argTypes[j]);
+                    }else{
+                        //rellenar los argumentos
+                        //asegurar que el dato sea del tipo que el constructor requiere
+                        args[j] = Extractor.extraerTexto(rs.getObject(j+1).toString(), argTypes[j]);
                         //resulta que si le metes un date a un constructor con strings truena
                         if(rs.getObject(j+1).getClass().getName().equals("java.sql.Date")){
 
@@ -524,7 +614,7 @@ public class DAO {
                 out[i] = rs.getMetaData().getColumnName(i+1);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
         return out;
     }

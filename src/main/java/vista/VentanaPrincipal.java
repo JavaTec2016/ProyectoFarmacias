@@ -6,8 +6,9 @@ package vista;
 
 import conexionBD.ConexionBDLite;
 import controlador.DAO;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
+
 import modelo.*;
 import reportes.Reportador;
 
@@ -101,7 +102,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuVistas = new javax.swing.JMenu();
         viewSupervisores = new javax.swing.JMenuItem();
         menuEstadisticas = new javax.swing.JMenu();
-        chartDemanda = new javax.swing.JMenuItem();
+        chartMeds = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Panel de control");
@@ -174,6 +175,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel3.add(btnPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, -1));
 
         btnUsuarios.setBackground(new java.awt.Color(80, 80, 80));
+        btnUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnUsuariosMouseReleased(evt);
+            }
+        });
 
         jPanel6.setBackground(new java.awt.Color(0, 153, 204));
         jPanel6.setMinimumSize(new java.awt.Dimension(7, 100));
@@ -206,17 +212,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             btnUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnUsuariosLayout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(195, Short.MAX_VALUE))
+            .addGroup(btnUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(btnUsuariosLayout.createSequentialGroup()
+                    .addGap(3, 3, 3)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         btnUsuariosLayout.setVerticalGroup(
             btnUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnUsuariosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-                .addContainerGap())
             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, Short.MAX_VALUE)
+            .addGroup(btnUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(btnUsuariosLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         jPanel3.add(btnUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 200, -1));
@@ -673,7 +683,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         txtRecetas5.setText("Medicamentos");
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/contrato.png"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/receta.png"))); // NOI18N
 
         javax.swing.GroupLayout panelMedicamentosLayout = new javax.swing.GroupLayout(panelMedicamentos);
         panelMedicamentos.setLayout(panelMedicamentosLayout);
@@ -862,16 +872,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuEstadisticas.setText("Estadísticas");
 
-        chartDemanda.setBackground(new java.awt.Color(0, 153, 255));
-        chartDemanda.setForeground(new java.awt.Color(255, 255, 255));
-        chartDemanda.setText("Demanda de medicamentos");
-        chartDemanda.setOpaque(true);
-        chartDemanda.addActionListener(new java.awt.event.ActionListener() {
+        chartMeds.setBackground(new java.awt.Color(0, 153, 255));
+        chartMeds.setForeground(new java.awt.Color(255, 255, 255));
+        chartMeds.setText("Existencias de medicamento");
+        chartMeds.setOpaque(true);
+        chartMeds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chartDemandaActionPerformed(evt);
+                chartMedsActionPerformed(evt);
             }
         });
-        menuEstadisticas.add(chartDemanda);
+        menuEstadisticas.add(chartMeds);
 
         jMenuBar1.add(menuEstadisticas);
 
@@ -891,7 +901,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPrincipalMouseReleased
 
     private void jLabel2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseReleased
-        
+           btnUsuariosMouseReleased(evt);
     }//GEN-LAST:event_jLabel2MouseReleased
 
     private void jPanel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseReleased
@@ -1063,12 +1073,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_rptMedicamentosActionPerformed
 
     private void viewSupervisoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSupervisoresActionPerformed
-        // TODO add your handling code here:
+        System.out.println("configurar tabla pacientes y botones");
+        configurarPanelBotones("Medicamentos por supervisor", null, null, null, null, "Supervisor_Medicamento");
+        //conector.prepararStatement("SELECT * FROM BranchNo", null, null);
+        panelBotones.configurarTabla();
+        panelBotones.setDisplay("Vista");
+        mostrarControl(false);
+        mostrarPanel(true);
     }//GEN-LAST:event_viewSupervisoresActionPerformed
 
-    private void chartDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chartDemandaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chartDemandaActionPerformed
+    private void chartMedsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chartMedsActionPerformed
+        Chart.packMediChart();
+    }//GEN-LAST:event_chartMedsActionPerformed
+
+    private void btnUsuariosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseReleased
+        System.out.println("configurar tabla pacientes y botones");
+        configurarPanelBotones("Usuarios", null, null, null, null, "Usuario");
+        //conector.prepararStatement("SELECT * FROM BranchNo", null, null);
+        panelBotones.configurarTabla();
+        panelBotones.setDisplay("Usuarios");
+        mostrarControl(false);
+        mostrarPanel(true);
+    }//GEN-LAST:event_btnUsuariosMouseReleased
 
     /**
      * @param args the command line arguments
@@ -1113,7 +1139,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnReportes;
     private javax.swing.JPanel btnUsuarios;
     private javax.swing.JButton btnVistas;
-    private javax.swing.JMenuItem chartDemanda;
+    private javax.swing.JMenuItem chartMeds;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
