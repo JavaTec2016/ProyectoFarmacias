@@ -2,10 +2,10 @@ package modelo;
 
 public class Farmaceutica extends ModeloBD{
     String Nombre;
-    String Telefono;
-    String Lada;
+    Integer Telefono;
+    Integer Lada;
 
-    public Farmaceutica(String nombre, String telefono, String lada) {
+    public Farmaceutica(String nombre, Integer telefono, Integer lada) {
         Nombre = nombre;
         Telefono = telefono;
         Lada = lada;
@@ -23,7 +23,7 @@ public class Farmaceutica extends ModeloBD{
         return new boolean[]{true, true, true};
     }
     public static String[] obtenerTipoDato(){
-        return new String[]{"VARCHAR", "VARCHAR", "VARCHAR"};
+        return new String[]{"VARCHAR", "INT", "INT"};
     }
     public static boolean[] obtenerNoNulos() {
         return new boolean[]{true, true, true};
